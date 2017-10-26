@@ -1,25 +1,12 @@
-# Profitoro
+# Yanguel
 
-> Take breaks during work. Exercise during breaks.
+> Your new web to buy.
 
-## Build Setup
+## Description
 
-``` bash
-# install dependencies
-$ npm install # Or yarn install
+Yanguel is a Web Application designed by Alberto Romero and Raúl Pavón.
 
-# serve with hot reload at localhost:3000
-$ npm run dev
 
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
 
 ## Licensing
 
