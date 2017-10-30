@@ -1,6 +1,6 @@
 <template>
   <div>
-    Hello Nuxt!
+    Welcome to the Yanguel!
     <yanguel> </yanguel>
   </div>
 </template>

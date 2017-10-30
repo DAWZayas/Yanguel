@@ -1,6 +1,8 @@
 <template>
   <div>
-    Header
+    <nuxt-link to="/">Home </nuxt-link>
+    <nuxt-link to="profile">Profile </nuxt-link>
+    <nuxt-link to="login">Login </nuxt-link>
   </div>
 </template>
 <script>
