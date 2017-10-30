@@ -17,12 +17,9 @@
               <nuxt-link class="nav-link profitoro-link" to="profile">Profile </nuxt-link>
             </li>
             <li class="nav-item">
-              <nuxt-link class="nav-link profitoro-link" to="login">Login </nuxt-link>
+              <nuxt-link class="nav-link profitoro-link" to="login">Login/Register </nuxt-link>
             </li>
           </ul>
-          <form class="buttons-holder">
-            <span class="nav-link profitoro-link" @click="onStartPage">Go to the start page</span>
-          </form>
         </div>
       </nav>
     </div>

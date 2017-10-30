@@ -1,6 +1,5 @@
 <template>
   <div>
-    Welcome to the Yanguel!
     <yanguel> </yanguel>
   </div>
 </template>
