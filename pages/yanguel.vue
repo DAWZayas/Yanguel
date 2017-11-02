@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-component></header-component>
-    <nuxt-link to="product">Product </nuxt-link>
+      <nuxt-link to="product">  Product </nuxt-link>
     <footer-component></footer-component>
   </div>
 </template>

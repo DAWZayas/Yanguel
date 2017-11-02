@@ -11,13 +11,13 @@
         <div class="collapse navbar-collapse" id="navbarHeader">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <nuxt-link class="nav-link profitoro-link" to="/">Home </nuxt-link>
+              <nuxt-link class="nav-link" to="/">Home </nuxt-link>
             </li>
             <li class="nav-item">
-              <nuxt-link class="nav-link profitoro-link" to="profile">Profile </nuxt-link>
+              <nuxt-link class="nav-link" to="profile">Profile </nuxt-link>
             </li>
             <li class="nav-item">
-              <nuxt-link class="nav-link profitoro-link" to="login">Login/Register </nuxt-link>
+              <nuxt-link class="nav-link" to="login">Login/Register </nuxt-link>
             </li>
           </ul>
         </div>
