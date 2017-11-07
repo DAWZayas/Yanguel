@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-component></header-component>
-    <div class = "jumbotron col-xs-12">
+    <div class = "jumbotron col-xs-12 row">
         <product v-for="product in products" :product="product" :key="product.key"></product>
     </div>
     <footer-component></footer-component>
@@ -14,9 +14,9 @@ export default {
   data () {
     return {
       products: [
-        { name: 'Producto 1',
-          price: 'Precio 1',
-          offer: 'Oferta 1',
+        { name: 'Coche deportivo',
+          price: '27€',
+          offer: '10€',
           src: 'https://avatars3.githubusercontent.com/u/17402800?s=88&v=4',
           key: 1
         },
