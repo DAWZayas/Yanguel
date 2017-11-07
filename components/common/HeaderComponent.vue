@@ -19,6 +19,9 @@
             <li class="nav-item">
               <nuxt-link class="nav-link" to="login">Login/Register </nuxt-link>
             </li>
+             <li class="nav-item">
+              <nuxt-link class="nav-link" to="cart">Cart </nuxt-link>
+            </li>
           </ul>
         </div>
       </nav>

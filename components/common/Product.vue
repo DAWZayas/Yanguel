@@ -1,13 +1,15 @@
 <template>
-    <div class="productos col-xs-12 col-md-4">
-       <img :src="product.src">
+    <div class = "products col-xs-12 col-md-2">
+    <nuxt-link  to="/product/:id">
+    <img :src="product.src">
       <p class="text title"> {{product.name}}</p>
       <div class="prices">
           <p class="text offer">{{product.offer}}</p>
           <p class="text price">{{product.price}}</p>
       </div>
-      <div>
-      <button class = "btn btn-default" @click="onSwitch"> {{this.switchButtonText}}</button>
+    </nuxt-link>
+      <div class = "button-div">
+      <button class = "btn btn-default" @click="onAction"> {{this.switchButtonText}}</button>
       </div>
     </div>
 </template>
@@ -38,11 +40,17 @@
     },
     methods: {
       onSwitch () {
-        this.isInChart = !this.isInChart
+
       },
       onAction (ev) {
         ev.preventDefault()
         ev.stopPropagation()
+        if (this.isInChart) {
+          this.$emit('removeFromCart', this.product)
+        } else {
+          this.$emit('addToCart', this.product)
+        }
+        this.isInChart = !this.isInChart
       }
     }
   }
@@ -55,7 +63,8 @@
   @import "../../assets/styles/vendors/bootstrap/variables";
   @import "../../assets/styles/vendors/bootstrap/mixins";
 
-.productos {
+.products {
+
     margin-top: 2em;
     margin-bottom: 2em;
     margin-right: 0.5em;
@@ -65,12 +74,14 @@
 }
 
 
-.productos img {
+.products img {
     border-radius: 0.5em;
     width: 100%;
+    margin-top: 0.2em;
 }
 
 .text {
+    color: black;
     font-weight: bold;
     cursor: default;
 }
@@ -83,7 +94,8 @@
 .prices {
     margin-left: 0.5em;
     text-align: center;
-    width: calc(20% + 4em);
+    font-size: 0.8em;
+    width: calc(20% + 5rem);
 }
 
 .price {
@@ -91,20 +103,22 @@
     float: right;
     text-decoration: line-through;
 }
-
+.button-div {
+  clear: both;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
 .offer {
     float: left;
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 @media (min-width: 500px) {
 
   .prices {
-      margin-left: 15em;
+      margin-left: 5em;
   }
-  .productos img {
-      width: 60%;
-  }
-  .productos:hover {
+
+  .products:hover {
       transform: scale(1.02);
   }
 }
