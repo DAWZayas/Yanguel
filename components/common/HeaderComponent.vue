@@ -47,8 +47,14 @@
   @import "../../assets/styles/vendors/bootstrap/mixins";
 
   .header {
-    height: $header-height;
+    display: block;
+    padding: 1em 0.5em;
+    width: 100vw;
+    color: #fff;
+    background-color: $color-lp-primary;
+    position:fixed;
     color: $color-primary;
+    z-index: 9999;
 
     @include media-breakpoint-down(md) {
       height: auto;
@@ -61,8 +67,8 @@
     .nuxt-link-active {
       font-weight: bold;
     }
-    .nav-link.profitoro-link {
-      color: rgba($color-primary, 0.7);
+    .nav-link {
+      color: $color-primary;
       cursor: pointer;
 
       @include media-breakpoint-down(md) {
