@@ -5,33 +5,71 @@
     <b>
       ALBERTO ROMERO ORTIZ DE ZARATE
     </b>
-    <br>
     <ol class="progtrckr" data-progtrckr-steps="5">
-        <li class="progtrckr-done">Order Processing</li>
-        <li class="progtrckr-done">Pre-Production</li>
-        <li class="progtrckr-done">In Production</li>
-        <li class="progtrckr-done">Shipped</li>
-        <li class="progtrckr-todo">Delivered</li>
+        <li class="progtrckr-done">Datos Personales</li>
+        <li class="progtrckr-done">Direccion</li>
+        <li class="progtrckr-done">Pago</li>
+        <li class="progtrckr-todo">Resumen</li>
     </ol>
-    <br>
-    <p>
-      fecha de nacimiento
-    </p>
-    <p>
-      sexo
-    </p>
-    <p>
-      direccion
-    </p>
-    <p>
-      correo electronico
-    </p>
-    <p>
-      pagos
-    </p>
+    <div class="datos">
+      <div class="dato">
+        <b>
+          Datos personales
+        </b>
+        <p>
+          datos personales
+        </p>
+        <p>
+          datos personales
+        </p>
+        <p>
+          datos personales
+        </p>
+        <p>
+          datos personales
+        </p>
+        <p>
+          datos personales
+        </p>
+      </div>
+      <div  class="dato">
+        <b>
+          Direccion
+        </b>
+        <p>
+          Direccion
+        </p>
+        <p>
+          Direccion
+        </p>
+        <p>
+          Direccion
+        </p>
+        <p>
+          Direccion
+        </p>
+      </div>
+      <div  class="dato">
+        <b>
+          Pagos
+        </b>
+        <p>
+          pagos
+        </p>
+        <p>
+          pagos
+        </p>
+        <p>
+          pagos
+        </p>
+        <p>
+          pagos
+        </p>
+      </div>
+    </div>
     <div class="botones">
       <div></div>
-      <button type="button" class="btn btn-default">Volver</button>
+      <button type="button" class="btn btn-default">Volver</button><button type="button" class="btn btn-default">Finalizar</button>
       <div></div>
     </div>
     </div>
@@ -51,7 +89,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 @import "../assets/styles/base/colors";
 
 ol.progtrckr {
@@ -110,14 +148,33 @@ ol.progtrckr {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	  grid-template-rows: 0.2fr 0.5fr 2fr 0.5fr;
     background-color: inherit;
-    min-height: 70vh;
 }
-.botones {
+.datos {
   width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 0.5em;
+  background-color: inherit;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.dato {
+  border: 0.3em solid rebeccapurple;
+  border-radius: 0.3em;
+}
+
+.botones {
+    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 0.5em;
+    max-height: 3em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 b{
   text-align: center;
@@ -125,4 +182,25 @@ b{
 p{
   text-align: center;
 }
+@media (min-width: 500px) {
+  .datos {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 0.5em;
+    background-color: inherit;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .lista {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+	  grid-template-rows: 1fr 1fr 2fr 1fr;
+    background-color: inherit;
+  }
+}
+
 </style>
