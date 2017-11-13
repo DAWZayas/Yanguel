@@ -62,7 +62,7 @@
     @include media-breakpoint-down(md) {
       height: auto;
       min-height: $header-md-height;
-      background-color: $color-white;
+      background-color: $color-lp-primary;
     }
     .container {
       height: 100%;
