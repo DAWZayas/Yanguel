@@ -8,9 +8,9 @@
       </div>
       <div class = "button-div btn-group">
       <button class = "btn btn-primary" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
-      <button class = "btn btn-default" data-toggle="modal" data-target = "#productModal" > Details</button>
+      <button class = "btn btn-default" data-toggle="modal" :data-target = "this.product.key" > Details</button>
       </div>
-      <div class="modal fade" id="productModal" tabindex="1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
+      <div class="modal fade" :id="idKey" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -37,6 +37,7 @@
   export default {
     data () {
       return {
+        idKey: this.product.key
       }
     },
     name: 'product',
