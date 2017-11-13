@@ -1,27 +1,34 @@
 <template>
-    <div class = "products col-xs-12 col-md-2">
-    <img :src="product.src">
-      <p class="text title"> {{product.name}}</p>
-      <div class="prices">
-          <p class="text offer">{{product.offer}}</p>
-          <p class="text price">{{product.price}}</p>
-      </div>
-      <div class = "button-div btn-group">
-      <button class = "btn btn-default" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
-      <button class = "btn btn-default" > Details</button>
+  <div class="modal fade" :id="idKey" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModal">{{product.name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Descripción: {{product.description}} <br>
+          Precio: {{product.price}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
+  </div>
 </template>
 
-<script>
+<script type="text/javascript">
   export default {
     data () {
       return {
+        idKey: this.product.key
       }
     },
     name: 'modalProduct',
-    components: {
-    },
     props: ['product'],
     methods: {
       onRemove (ev) {
