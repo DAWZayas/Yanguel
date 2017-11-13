@@ -1,26 +1,19 @@
 <template>
     <div class = "products col-xs-12 col-md-2">
-    <nuxt-link  to="/product/:id">
     <img :src="product.src">
       <p class="text title"> {{product.name}}</p>
       <div class="prices">
           <p class="text offer">{{product.offer}}</p>
           <p class="text price">{{product.price}}</p>
       </div>
-    </nuxt-link>
       <div class = "button-div btn-group">
       <button class = "btn btn-default" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
-      <button class = "btn btn-default" :class="{disabled: !product.inCart}" @click = "onRemove" > <i class="material-icons">delete</i></button>
+      <button class = "btn btn-default" > Details</button>
       </div>
     </div>
 </template>
 
 <script>
-  let BUTTON_TEXT = {
-    ADD: 'Add to cart',
-    REMOVE: 'Remove from cart'
-  }
-
   export default {
     data () {
       return {
@@ -30,14 +23,6 @@
     components: {
     },
     props: ['product'],
-    computed: {
-      buttonText () {
-        return this.inCart ? BUTTON_TEXT.ADD : BUTTON_TEXT.REMOVE
-      },
-      switchButtonText () {
-        return this.inCart ? BUTTON_TEXT.REMOVE : BUTTON_TEXT.ADD
-      }
-    },
     methods: {
       onSwitch () {
 
