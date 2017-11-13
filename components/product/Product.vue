@@ -7,7 +7,7 @@
           <p class="text price">{{product.price}}</p>
       </div>
       <div class = "button-div btn-group">
-      <button class = "btn btn-default" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
+      <button class = "btn btn-primary" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
       <button class = "btn btn-default" > Details</button>
       </div>
     </div>
