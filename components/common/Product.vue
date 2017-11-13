@@ -8,8 +8,9 @@
           <p class="text price">{{product.price}}</p>
       </div>
     </nuxt-link>
-      <div class = "button-div">
-      <button class = "btn btn-default" @click="onAction"> {{this.switchButtonText}}</button>
+      <div class = "button-div btn-group">
+      <button class = "btn btn-default" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
+      <button class = "btn btn-default" :class="{disabled: !product.inCart}" @click = "onRemove" > <i class="material-icons">delete</i></button>
       </div>
     </div>
 </template>
@@ -23,7 +24,6 @@
   export default {
     data () {
       return {
-        isInChart: false
       }
     },
     name: 'product',
@@ -32,25 +32,25 @@
     props: ['product'],
     computed: {
       buttonText () {
-        return this.isInChart ? BUTTON_TEXT.ADD : BUTTON_TEXT.REMOVE
+        return this.inCart ? BUTTON_TEXT.ADD : BUTTON_TEXT.REMOVE
       },
       switchButtonText () {
-        return this.isInChart ? BUTTON_TEXT.REMOVE : BUTTON_TEXT.ADD
+        return this.inCart ? BUTTON_TEXT.REMOVE : BUTTON_TEXT.ADD
       }
     },
     methods: {
       onSwitch () {
 
       },
-      onAction (ev) {
+      onAdd (ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        if (this.isInChart) {
-          this.$emit('removeFromCart', this.product)
-        } else {
-          this.$emit('addToCart', this.product)
-        }
-        this.isInChart = !this.isInChart
+        this.$emit('addToCart', this.product)
+      },
+      onRemove (ev) {
+        ev.preventDefault()
+        ev.stopPropagation()
+        this.$emit('removeFromCart', this.product)
       }
     }
   }
@@ -92,7 +92,6 @@
 }
 
 .prices {
-    margin-left: 0.5em;
     text-align: center;
     font-size: 0.8em;
     width: calc(20% + 5rem);
@@ -100,22 +99,23 @@
 
 .price {
     color: #4B4B4B;
+    font-size: 0.8em;
     float: right;
     text-decoration: line-through;
 }
 .button-div {
-  clear: both;
   text-align: center;
-  margin-bottom: 0.5em;
+  clear: both;
 }
 .offer {
+    margin-left: -1em;
     float: left;
-    font-size: 1.4em;
+    font-size: 1.3em;
 }
 @media (min-width: 500px) {
 
   .prices {
-      margin-left: 5em;
+      margin-left: 3em;
   }
 
   .products:hover {
