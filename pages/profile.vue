@@ -41,7 +41,7 @@
     </div>
     <footer-component></footer-component>
   </div>
-  
+
 </template>
 <script>
 import { HeaderComponent, FooterComponent } from '~/components/common'
@@ -63,6 +63,7 @@ export default {
 }
 
 .gridRows{
+  padding-top: 8em;
   display: grid;
 }
 

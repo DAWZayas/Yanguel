@@ -92,6 +92,7 @@ export default {
 <style scoped lang="scss">
 @import "../assets/styles/base/colors";
 
+
 ol.progtrckr {
         display: table;
         list-style-type: none;
@@ -111,7 +112,7 @@ ol.progtrckr {
         border-bottom: 4px solid yellowgreen;
     }
     ol.progtrckr li.progtrckr-todo {
-        color: silver; 
+        color: silver;
         border-bottom: 4px solid silver;
     }
 
@@ -145,6 +146,7 @@ ol.progtrckr {
 
 
 .lista {
+    padding-top: 8em;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
