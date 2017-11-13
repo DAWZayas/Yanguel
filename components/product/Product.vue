@@ -21,11 +21,11 @@
             </div>
             <div class="modal-body">
               Descripción: {{product.description}} <br>
-              Precio: {{product.price}}
+              Precio: {{product.offer}}
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button class = "btn btn-primary" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
+              <button class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
