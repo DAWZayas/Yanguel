@@ -8,7 +8,7 @@
       </div>
       <div class = "button-div btn-group">
       <button class = "btn btn-primary" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
-      <button class = "btn btn-default" data-toggle="modal" :data-target = "this.product.key" > Details</button>
+      <button class = "btn btn-secondary" data-toggle="modal" :data-target = "targetKey" > Details</button>
       </div>
       <div class="modal fade" :id="idKey" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -37,7 +37,8 @@
   export default {
     data () {
       return {
-        idKey: this.product.key
+        idKey: this.product.key,
+        targetKey: '#' + this.product.key
       }
     },
     name: 'product',
@@ -123,7 +124,7 @@
       margin-left: 3em;
   }
 
-  .products:hover {
+  .productes:hover {
       transform: scale(1.02);
   }
 }
