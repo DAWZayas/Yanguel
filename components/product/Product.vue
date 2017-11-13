@@ -64,7 +64,6 @@
   @import "../../assets/styles/vendors/bootstrap/mixins";
 
 .products {
-
     margin-top: 2em;
     margin-bottom: 2em;
     margin-right: 0.5em;

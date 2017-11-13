@@ -10,7 +10,8 @@
   </div>
 </template>
 <script>
-import { HeaderComponent, FooterComponent, Product } from '~/components/common'
+import { HeaderComponent, FooterComponent } from '~/components/common'
+import { Product } from '~/components/product'
 
 export default {
   data () {
