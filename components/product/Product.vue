@@ -1,31 +1,32 @@
 <template>
     <div class = "products col-xs-12 col-md-2">
-    <img :src="product.src">
-      <p class="text title"> {{product.name}}</p>
-      <div class="prices">
-          <p class="text offer">{{product.offer}}</p>
-          <p class="text price">{{product.price}}</p>
-      </div>
-      <div class = "button-div btn-group">
-      <button class = "btn btn-primary" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
-      <button class = "btn btn-secondary" data-toggle="modal" :data-target = "targetKey" > Details</button>
-      </div>
+      <img :src="product.src">
+        <p class="text title"> {{product.name}}</p>
+        <div class="prices">
+            <p class="text offer">{{product.offer}}</p>
+            <p class="text price">{{product.price}}</p>
+        </div>
+        <div class = "button-div btn-group">
+        <button class = "btn btn-primary" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
+        <button class = "btn btn-secondary" data-toggle="modal" :data-target = "targetKey" > Details</button>
+        </div>
+
       <div class="modal fade" :id="idKey" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="productModalLabel">{{product.name}}</h5>
+              <h5 class="modal-title" id="productModal">{{product.name}}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               Descripción: {{product.description}} <br>
-              Precio: {{product.offer}}
+              Precio: {{product.price}}
             </div>
             <div class="modal-footer">
               <button class = "btn btn-primary" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
-              <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -34,6 +35,7 @@
 </template>
 
 <script>
+
   export default {
     data () {
       return {
@@ -71,7 +73,7 @@
   @import "../../assets/styles/vendors/bootstrap/mixins";
 
 .products {
-    margin-top: 2em;
+    margin-top: 4em;
     margin-bottom: 2em;
     margin-right: 0.5em;
     border-radius: 0.5em;
