@@ -57,6 +57,7 @@
     background-color: $color-lp-primary;
     position:fixed;
     color: $color-primary;
+    z-index: 9999;
 
     @include media-breakpoint-down(md) {
       height: auto;

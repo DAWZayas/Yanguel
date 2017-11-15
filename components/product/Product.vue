@@ -2,12 +2,14 @@
     <div class = "products col-xs-12 col-md-2">
       <img :src="product.src">
         <p class="text title"> {{product.name}}</p>
-        <div class="prices">
-            <p class="text offer">{{product.offer}}</p>
-            <p class="text price">{{product.price}}</p>
+        <p class="text transparent">En stock: {{product.stock > 0 ? product.stock : "Agotado"}}</p>
+        <div class="prices row">
+            <p v-if="product.offer" class="text offer">{{product.offer}}</p>
+            <p class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price}}</p>
         </div>
-        <div class = "button-div btn-group">
-        <button class = "btn btn-primary" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
+        <div class = "button-div btn-group row">
+        <button class = "btn btn-primary" @click="onAdd" :class="{disabled: !product.stock}" :disabled="!product.stock"> <i class="material-icons">add_shopping_cart</i></button>
+        <button class = "btn btn-primary" @click="onRemove" :class="{disabled: !product.inCart}" :disabled="!product.inCart"> <i class="material-icons">delete</i></button>
         <button class = "btn btn-secondary" data-toggle="modal" :data-target = "targetKey" > Details</button>
         </div>
 
@@ -22,10 +24,10 @@
             </div>
             <div class="modal-body">
               Descripción: {{product.description}} <br>
-              Precio: {{product.price}}
+              Precio: {{product.offer ? product.offer : product.price}}
             </div>
             <div class="modal-footer">
-              <button class = "btn btn-primary" @click="onAdd"> <i class="material-icons">add_shopping_cart</i></button>
+              <button class = "btn btn-primary" @click="onAdd" :class="{disabled: !product.stock}" :disabled="!product.stock"> <i class="material-icons">add_shopping_cart</i></button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -94,12 +96,17 @@
     cursor: default;
 }
 
+.transparent {
+  opacity: 0.3;
+}
+
 .title {
     color: rgba(73, 71, 71, 0.81);
     text-align: center;
 }
 
 .prices {
+    margin-left: 5em;
     text-align: center;
     font-size: 0.8em;
     width: calc(20% + 5rem);
