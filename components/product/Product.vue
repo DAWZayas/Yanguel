@@ -2,12 +2,12 @@
     <div class = "products col-xs-12 col-md-2">
       <img :src="product.src">
         <p class="text title"> {{product.name}}</p>
-        <p class="text transparent">En stock: {{product.stock > 0 ? product.stock : "Agotado"}}</p>
+        <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + "unidades." : "Producto Agotado."}}</p>
         <div class="prices row">
             <p v-if="product.offer" class="text offer">{{product.offer}}</p>
             <p class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price}}</p>
         </div>
-        <div class = "button-div btn-group row">
+        <div class = "button-div btn-group">
         <button class = "btn btn-primary" @click="onAdd" :class="{disabled: !product.stock}" :disabled="!product.stock"> <i class="material-icons">add_shopping_cart</i></button>
         <button class = "btn btn-primary" @click="onRemove" :class="{disabled: !product.inCart}" :disabled="!product.inCart"> <i class="material-icons">delete</i></button>
         <button class = "btn btn-secondary" data-toggle="modal" :data-target = "targetKey" > Details</button>
@@ -50,9 +50,6 @@
     },
     props: ['product'],
     methods: {
-      onSwitch () {
-
-      },
       onAdd (ev) {
         ev.preventDefault()
         ev.stopPropagation()
@@ -114,18 +111,20 @@
 
 .price {
     color: #4B4B4B;
+    margin-left: 2em;
     font-size: 0.8em;
     float: right;
     text-decoration: line-through;
 }
-.button-div {
-  text-align: center;
-  clear: both;
-}
+
 .offer {
     margin-left: -1em;
     float: left;
     font-size: 1.3em;
+}
+.button-div {
+  text-align: center;
+  clear: both;
 }
 @media (min-width: 500px) {
 

@@ -1,7 +1,7 @@
 const products = [
   { name: 'Consola',
-    price: 'Mucho más',
-    offer: 'Mucho',
+    price: '500€',
+    offer: '',
     inCart: false,
     stock: 5,
     description: 'lorem ipsum 1',
@@ -9,8 +9,8 @@ const products = [
     key: 1
   },
   { name: 'iPhone',
-    price: 'Carísimo',
-    offer: 'Caro',
+    price: '1000€',
+    offer: '200€',
     inCart: false,
     stock: 5,
     description: 'lorem ipsum 2',
@@ -18,8 +18,8 @@ const products = [
     key: 2
   },
   { name: 'Café del Starbucks',
-    price: 'Pulmones',
-    offer: 'Riñón',
+    price: '5.40€',
+    offer: '3.20€',
     inCart: false,
     stock: 5,
     description: 'lorem ipsum 3',
