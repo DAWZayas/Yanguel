@@ -2,13 +2,13 @@
     <div class = "products col-xs-12 col-md-2">
       <a data-toggle="modal" :data-target = "targetKey" ><img :src="product.src"> </a>
         <p class="text title"> {{product.name}}</p>
-        <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + "unidades." : "Producto Agotado."}}</p>
+        <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}</p>
         <div class="prices row">
             <p v-if="product.offer" class="text offer">{{product.offer}}</p>
             <p class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price}}</p>
         </div>
         <div class = "button-div input-group">
-          <input type="number" class="form-control col-xs-2" v-model ="cuantity" placeholder="cantidad" aria-describedby="basic-addon1">
+          <input type="number" class="form-control col-xs-2" v-model ="cuantity" :disabled="product.stock <= 0" min = '0' :max = 'product.stock' placeholder="cantidad" aria-describedby="basic-addon1">
           <button class = "btn btn-primary" @click="onAdd" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> <i class="material-icons">add_shopping_cart</i></button>
         </div>
 
@@ -43,7 +43,8 @@
       return {
         cuantity: 0,
         idKey: this.product.key,
-        targetKey: '#' + this.product.key
+        targetKey: '#' + this.product.key,
+        shoppingCartProduct: this.product
       }
     },
     name: 'product',
@@ -54,13 +55,9 @@
       onAdd (ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        this.product.cuantity = this.cuantity
-        this.$emit('addToCart', this.product)
-      },
-      onRemove (ev) {
-        ev.preventDefault()
-        ev.stopPropagation()
-        this.$emit('removeFromCart', this.product)
+        this.shoppingCartProduct.cuantity = this.cuantity === '' ? 0 : parseInt(this.cuantity)
+        console.log(this.shoppingCartProduct.cuantity)
+        this.shoppingCartProduct.cuantity !== 0 ? this.$emit('addToCart', this.shoppingCartProduct) : this.$emit('removeFromCart', this.shoppingCartProduct)
       }
     }
   }
