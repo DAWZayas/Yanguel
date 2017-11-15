@@ -12,7 +12,7 @@ export default {
   },
   removeFromCart (state, product) {
     const index = state.shoppingCart.findIndex(p => product.key === p.key)
-    state.products.find(p => product.key === p.key).stock += state.shoppingCart[index].cuantity
+    state.products.find(p => product.key === p.key).stock = state.products.find(p => product.key === p.key).maxStock
     state.shoppingCart.splice(index, 1)
     state.products.find(p => product.key === p.key).inCart = false
   }
