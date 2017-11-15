@@ -13,7 +13,7 @@
         <button class = "btn btn-secondary" data-toggle="modal" :data-target = "targetKey" > Details</button>
         </div>
 
-      <div class="modal fade" :id="idKey" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
+      <div class="modal fade down" :id="idKey" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -74,6 +74,7 @@
 .products {
     margin-top: 4em;
     margin-bottom: 2em;
+    margin-left: 3em;
     margin-right: 0.5em;
     border-radius: 0.5em;
     background-color: rgba(207, 203, 203, 0.62);
@@ -125,6 +126,10 @@
 .button-div {
   text-align: center;
   clear: both;
+}
+
+.down{
+  margin-top: 10em;
 }
 @media (min-width: 500px) {
 

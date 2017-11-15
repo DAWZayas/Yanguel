@@ -2,7 +2,7 @@
   <div>
     <header-component></header-component>
     <div class = "jumbotron col-xs-12">
-      <div class = "col-md-12 row">
+      <div class = "col-md-12 row marginTop">
         <product v-for="product in products" :product="product" :key="product.key" @addToCart="addToCart" @removeFromCart = "removeFromCart"></product>
       </div>
     </div>
@@ -36,4 +36,7 @@ export default {
 }
 </script>
 <style lang="scss">
+  .marginTop{
+    top: 0.5em;
+  }
 </style>
