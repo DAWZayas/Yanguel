@@ -1,6 +1,6 @@
 const products = [
   { name: 'Consola',
-    price: '500€',
+    price: '500',
     offer: '',
     inCart: false,
     maxStock: 5,
@@ -10,8 +10,8 @@ const products = [
     key: 1
   },
   { name: 'iPhone',
-    price: '1000€',
-    offer: '200€',
+    price: '1000',
+    offer: '200',
     inCart: false,
     maxStock: 5,
     stock: 5,
@@ -20,8 +20,8 @@ const products = [
     key: 2
   },
   { name: 'Café del Starbucks',
-    price: '5.40€',
-    offer: '3.20€',
+    price: '5.40',
+    offer: '3.20',
     inCart: false,
     maxStock: 5,
     stock: 5,

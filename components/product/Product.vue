@@ -4,11 +4,11 @@
         <p class="text title"> {{product.name}}</p>
         <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}</p>
         <div class="prices row">
-            <p v-if="product.offer" class="text offer">{{product.offer}}</p>
-            <p class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price}}</p>
+            <p v-if="product.offer" class="text offer">{{product.offer}}€</p>
+            <p class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price}}€</p>
         </div>
-        <div class = "button-div input-group">
-          <input type="number" class="form-control col-xs-2" v-model ="cuantity" :disabled="product.stock <= 0" min = '0' :max = 'product.stock' placeholder="cantidad" aria-describedby="basic-addon1">
+        <div class = "button-div input-group marginBot">
+          <input type="number" class="form-control col-xs-2" v-model ="cuantity" :disabled="product.stock <= 0" min = '0' :max = "product.stock" placeholder="cantidad" aria-describedby="basic-addon1">
           <button class = "btn btn-primary" @click="onAdd" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> <i class="material-icons">add_shopping_cart</i></button>
         </div>
 
@@ -23,8 +23,8 @@
             </div>
             <div class="modal-body">
               Descripción: {{product.description}} <br>
-              Precio: {{product.offer ? product.offer : product.price}}<br>
-              {{product.stock > 0 ? "En stock: " + product.stock + "unidades." : "Producto Agotado."}}
+              Precio: {{product.offer ? product.offer : product.price}}€<br>
+              {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}
             </div>
             <div class="modal-footer">
               <button class = "btn btn-primary" @click="onAdd" :class="{disabled: !product.stock}" :disabled="!product.stock"> <i class="material-icons">add_shopping_cart</i></button>
@@ -58,6 +58,7 @@
         this.shoppingCartProduct.cuantity = this.cuantity === '' ? 0 : parseInt(this.cuantity)
         console.log(this.shoppingCartProduct.cuantity)
         this.shoppingCartProduct.cuantity !== 0 ? this.$emit('addToCart', this.shoppingCartProduct) : this.$emit('removeFromCart', this.shoppingCartProduct)
+        this.cuantity = 0
       }
     }
   }
@@ -91,6 +92,10 @@
     color: black;
     font-weight: bold;
     cursor: default;
+}
+
+.marginBot{
+  margin-bottom: 1em;
 }
 
 .transparent {

@@ -3,11 +3,13 @@
       <div class = "col-xs-4"><img :src="product.src"></div>
       <div class = "col-xs-8">
         <p class="text title"> {{product.name}}</p>
-        <div class="prices">
-            <p class="text offer">{{product.offer}}</p>
-            <p class="text price">{{product.price}}</p>
+
+        <div class="prices row">
+          <p class = "text clear "> Precio total: </p>
+            <p v-if="product.offer" class="text offer">{{product.offer * product.cuantity}} €</p>
+            <p v-if="!product.offer" class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price * product.cuantity}} €</p>
         </div>
-        <div class = "button-div btn-group">
+        <div class = "button-div btn-group ">
           <button class = "btn btn-default" @click="onRemove"> Eliminar</button>
         </div>
       </div>
@@ -62,6 +64,12 @@
     color: black;
     font-weight: bold;
     cursor: default;
+}
+
+.clear{
+  clear: both;
+  margin-right: 2em;
+  margin-left: -2em;
 }
 
 .transparent {
