@@ -27,8 +27,11 @@
               {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}
             </div>
             <div class="modal-footer">
-              <button class = "btn btn-primary" @click="onAdd" :class="{disabled: !product.stock}" :disabled="!product.stock"> <i class="material-icons">add_shopping_cart</i></button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <div class = "button-div input-group marginBot">
+                <input type="number" class="form-control col-xs-2" v-model ="cuantity" :disabled="product.stock <= 0" min = '0' :max = "product.stock" placeholder="cantidad" aria-describedby="basic-addon1">
+                <button class = "btn btn-primary" @click="onAdd" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> <i class="material-icons">add_shopping_cart</i></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
             </div>
           </div>
         </div>
