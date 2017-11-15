@@ -34,7 +34,7 @@
   }
 </script>
 <style lang="scss">
-  @import "../../assets/styles/base/colors";
+    @import "../../assets/styles/base/colors";
   @import "../../assets/styles/base/variables";
   @import "../../assets/styles/vendors/flex";
   @import "../../assets/styles/vendors/bootstrap/functions";
@@ -42,8 +42,9 @@
   @import "../../assets/styles/vendors/bootstrap/mixins";
 
 .products {
-    margin-top: 2em;
+    margin-top: 4em;
     margin-bottom: 2em;
+    margin-left: 3em;
     margin-right: 0.5em;
     border-radius: 0.5em;
     background-color: rgba(207, 203, 203, 0.62);
@@ -63,12 +64,17 @@
     cursor: default;
 }
 
+.transparent {
+  opacity: 0.3;
+}
+
 .title {
     color: rgba(73, 71, 71, 0.81);
     text-align: center;
 }
 
 .prices {
+    margin-left: 5em;
     text-align: center;
     font-size: 0.8em;
     width: calc(20% + 5rem);
@@ -76,18 +82,24 @@
 
 .price {
     color: #4B4B4B;
+    margin-left: 2em;
     font-size: 0.8em;
     float: right;
     text-decoration: line-through;
+}
+
+.offer {
+    margin-left: -1em;
+    float: left;
+    font-size: 1.3em;
 }
 .button-div {
   text-align: center;
   clear: both;
 }
-.offer {
-    margin-left: -1em;
-    float: left;
-    font-size: 1.3em;
+
+.down{
+  top: 10em;
 }
 @media (min-width: 500px) {
 
@@ -95,7 +107,7 @@
       margin-left: 3em;
   }
 
-  .products:hover {
+  .productes:hover {
       transform: scale(1.02);
   }
 }

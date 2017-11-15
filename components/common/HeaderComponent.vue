@@ -11,16 +11,16 @@
         <div class="collapse navbar-collapse" id="navbarHeader">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <nuxt-link class="nav-link" to="/"><i class="material-icons">home</i> </nuxt-link>
+              <nuxt-link class="nav-link" to="/"><i class="material-icons">home</i> Home</nuxt-link>
             </li>
             <li class="nav-item">
-              <nuxt-link class="nav-link" to="profile"><i class="material-icons">perm_identity</i> </nuxt-link>
+              <nuxt-link class="nav-link" to="profile"><i class="material-icons">perm_identity</i> Profile</nuxt-link>
             </li>
             <li class="nav-item">
-              <nuxt-link class="nav-link" to="login"> <i class="material-icons">account_circle</i> </nuxt-link>
+              <nuxt-link class="nav-link" to="login"> <i class="material-icons">account_circle</i> LogIn</nuxt-link>
             </li>
              <li class="nav-item">
-              <nuxt-link class="nav-link" to="cart"> <i class="material-icons">shopping_cart</i> </nuxt-link>
+              <nuxt-link class="nav-link" to="cart"> <i class="material-icons">shopping_cart</i> Show Cart</nuxt-link>
             </li>
           </ul>
         </div>

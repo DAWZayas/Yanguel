@@ -1,16 +1,15 @@
 <template>
     <div class = "products col-xs-12 col-md-2">
-      <img :src="product.src">
+      <a data-toggle="modal" :data-target = "targetKey" ><img :src="product.src"> </a>
         <p class="text title"> {{product.name}}</p>
         <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + "unidades." : "Producto Agotado."}}</p>
         <div class="prices row">
             <p v-if="product.offer" class="text offer">{{product.offer}}</p>
             <p class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price}}</p>
         </div>
-        <div class = "button-div btn-group">
-        <button class = "btn btn-primary" @click="onAdd" :class="{disabled: !product.stock}" :disabled="!product.stock"> <i class="material-icons">add_shopping_cart</i></button>
-        <button class = "btn btn-primary" @click="onRemove" :class="{disabled: !product.inCart}" :disabled="!product.inCart"> <i class="material-icons">delete</i></button>
-        <button class = "btn btn-secondary" data-toggle="modal" :data-target = "targetKey" > Details</button>
+        <div class = "button-div input-group">
+          <input type="number" class="form-control col-xs-2" v-model ="cuantity" placeholder="cantidad" aria-describedby="basic-addon1">
+          <button class = "btn btn-primary" @click="onAdd" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> <i class="material-icons">add_shopping_cart</i></button>
         </div>
 
       <div class="modal fade down" :id="idKey" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
@@ -24,7 +23,8 @@
             </div>
             <div class="modal-body">
               Descripción: {{product.description}} <br>
-              Precio: {{product.offer ? product.offer : product.price}}
+              Precio: {{product.offer ? product.offer : product.price}}<br>
+              {{product.stock > 0 ? "En stock: " + product.stock + "unidades." : "Producto Agotado."}}
             </div>
             <div class="modal-footer">
               <button class = "btn btn-primary" @click="onAdd" :class="{disabled: !product.stock}" :disabled="!product.stock"> <i class="material-icons">add_shopping_cart</i></button>
@@ -41,6 +41,7 @@
   export default {
     data () {
       return {
+        cuantity: 0,
         idKey: this.product.key,
         targetKey: '#' + this.product.key
       }
@@ -53,6 +54,7 @@
       onAdd (ev) {
         ev.preventDefault()
         ev.stopPropagation()
+        this.product.cuantity = this.cuantity
         this.$emit('addToCart', this.product)
       },
       onRemove (ev) {
@@ -129,7 +131,7 @@
 }
 
 .down{
-  margin-top: 10em;
+  top: 10em;
 }
 @media (min-width: 500px) {
 

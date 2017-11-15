@@ -1,13 +1,12 @@
 export default {
   addToCart (state, product) {
     if (state.shoppingCart.find(p => product.key === p.key)) {
-      state.shoppingCart[state.shoppingCart.findIndex(p => product.key === p.key)].cuantity++
-      state.products.find(p => product.key === p.key).stock--
+      state.shoppingCart[state.shoppingCart.findIndex(p => product.key === p.key)].cuantity = product.cuantity
+      state.products.find(p => product.key === p.key).stock -= product.cuantity
     } else {
-      product.cuantity = 1
       state.shoppingCart.push(product)
       state.products.find(p => product.key === p.key).inCart = true
-      state.products.find(p => product.key === p.key).stock--
+      state.products.find(p => product.key === p.key).stock -= product.cuantity
     }
   },
   removeFromCart (state, product) {
