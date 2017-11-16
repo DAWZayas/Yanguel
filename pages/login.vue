@@ -1,23 +1,17 @@
 <template>
   <div>
     <header-component></header-component>
-    <div class = "container">
-      <form class = "col-xs-4 form">
-        <div class = "form-group row">
-          <label for="formUser" class="col-sm-2 col-form-label">User</label>
-          <div class= "col-xs-8">
-            <input type="text" class="form-control" id="formUser" placeholder="User">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-          <div class="col-xs-8">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
+    <el-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign" style="padding-top: 8em">
+      <el-form-item label="Name">
+        <el-input v-model="formLabelAlign.name"></el-input>
+      </el-form-item>
+      <el-form-item label="Activity zone">
+        <el-input v-model="formLabelAlign.region"></el-input>
+      </el-form-item>
+      <el-form-item label="Activity form">
+        <el-input v-model="formLabelAlign.type"></el-input>
+      </el-form-item>
+    </el-form>
     <footer-component></footer-component>
   </div>
 </template>
@@ -27,8 +21,16 @@ import { HeaderComponent, FooterComponent } from '~/components/common'
 
 export default {
   data () {
-    return {}
+    return {
+      labelPosition: 'right',
+      formLabelAlign: {
+        name: '',
+        region: '',
+        type: ''
+      }
+    }
   },
+
   components: {
     FooterComponent,
     HeaderComponent

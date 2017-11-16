@@ -1,5 +1,6 @@
 module.exports = {
-  css: ['~/assets/styles/main.scss'],
+  css: ['~/assets/styles/main.scss',
+    '~/node_modules/element-ui/lib/theme-chalk/index.css'],
   /*
   ** Headers of the page
   */
@@ -28,6 +29,10 @@ module.exports = {
 
     ]
   },
+
+  plugins: [
+    'plugins/element-ui.js'
+  ],
   /*
   ** Customize the progress-bar color
   */
