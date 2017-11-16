@@ -9,10 +9,8 @@
             <p v-if="product.offer" class="text offer">{{product.offer * product.cuantity}} €</p>
             <p v-if="!product.offer" class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price * product.cuantity}} €</p>
         </div>
-        <div class = "button-div input-group marginBot">
-          <input type="number" class="form-control col-xs-2" v-model ="cuantity" :disabled="product.stock <= 0" min = '0' :max = "product.stock" placeholder="cantidad" aria-describedby="basic-addon1">
+          <el-input-number type="number" v-model ="cuantity" :disabled="product.stock <= 0" :min = '0' :max = "product.stock" placeholder="cantidad" aria-describedby="basic-addon1"></el-input-number>
           <button class = "btn btn-primary" @click="onValueChange" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> <i class="material-icons">add_shopping_cart</i></button>
-        </div>
         <button type="button" class="btn btn-secondary" @click="onRemove">Eliminar</button>
       </div>
     </div>
@@ -35,7 +33,7 @@
         ev.preventDefault()
         ev.stopPropagation()
         this.shoppingCartProduct.cuantity = parseInt(this.cuantity)
-        this.$emit('onValueChange', this.shoppingCartProduct)
+        this.shoppingCartProduct.cuantity !== 0 ? this.$emit('onValueChange', this.shoppingCartProduct) : this.$emit('removeFromCart', this.shoppingCartProduct)
         this.cuantity = 0
       },
       onRemove (ev) {
