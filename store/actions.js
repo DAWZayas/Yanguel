@@ -20,6 +20,16 @@ export default {
       return
     }
     commit('removeFromCart', product)
+  },
+  /**
+   * change value from a product in the shopping cart
+   * @param {object} store
+   * @param {object} product
+   */
+  onValueChange ({commit, state}, product) {
+    if (!product) {
+      return
+    }
+    commit('onValueChange', product)
   }
-
 }

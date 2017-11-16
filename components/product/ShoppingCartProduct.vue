@@ -4,14 +4,16 @@
       <div class = "col-xs-8">
         <p class="text title"> {{product.name}}</p>
 
-        <div class="prices row">
+        <div class="prices row" v-if="product.cuantity">
           <p class = "text clear "> Precio total: </p>
             <p v-if="product.offer" class="text offer">{{product.offer * product.cuantity}} €</p>
             <p v-if="!product.offer" class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price * product.cuantity}} €</p>
         </div>
-        <div class = "button-div btn-group ">
-          <button class = "btn btn-default" @click="onRemove"> Eliminar</button>
+        <div class = "button-div input-group marginBot">
+          <input type="number" class="form-control col-xs-2" v-model ="cuantity" :disabled="product.stock <= 0" min = '0' :max = "product.stock" placeholder="cantidad" aria-describedby="basic-addon1">
+          <button class = "btn btn-primary" @click="onValueChange" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> <i class="material-icons">add_shopping_cart</i></button>
         </div>
+        <button type="button" class="btn btn-secondary" @click="onRemove">Eliminar</button>
       </div>
     </div>
 </template>
@@ -20,6 +22,8 @@
   export default {
     data () {
       return {
+        cuantity: 0,
+        shoppingCartProduct: this.product
       }
     },
     name: 'shoppingCartProduct',
@@ -27,10 +31,17 @@
     },
     props: ['product'],
     methods: {
+      onValueChange (ev) {
+        ev.preventDefault()
+        ev.stopPropagation()
+        this.shoppingCartProduct.cuantity = parseInt(this.cuantity)
+        this.$emit('onValueChange', this.shoppingCartProduct)
+        this.cuantity = 0
+      },
       onRemove (ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        this.$emit('removeFromCart', this.product)
+        this.$emit('removeFromCart', this.shoppingCartProduct)
       }
     }
   }

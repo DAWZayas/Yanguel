@@ -3,7 +3,7 @@
     <header-component></header-component>
     <div class = "jumbotron col-xs-12">
       <div class = "col-md-12 row marginTop">
-        <shopping-cart-product v-for="product in shoppingCart" :product="product" :key="product.key" @addToCart="addToCart" @removeFromCart = "removeFromCart"></shopping-cart-product>
+        <shopping-cart-product v-for="product in shoppingCart" :product="product" :key="product.key" @onValueChange="onValueChange" @removeFromCart = "removeFromCart"></shopping-cart-product>
       </div>
     </div>
     <footer-component></footer-component>
@@ -31,7 +31,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['addToCart', 'removeFromCart'])
+    ...mapActions(['onValueChange', 'removeFromCart'])
   }
 }
 </script>
