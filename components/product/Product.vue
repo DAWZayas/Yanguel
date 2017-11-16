@@ -1,18 +1,26 @@
 <template>
-    <el-card :body-style="{ padding: '0px' }">
-      <a data-toggle="modal" :data-target = "targetKey" >
+    <el-card class = "marginTop" :body-style="{ padding: '0px' }">
         <img :src="product.src" class="image">
-      </a>
-      <div style="padding: 14px;">
-        <span>{{product.name}}</span>
+      <div class = "padding">
+        <div class = "text title">{{product.name}}</div>
         <div class="bottom clearfix">
           <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}</p>
-          <div class="prices row">
-              <p v-if="product.offer" class="text offer">{{product.offer}}€</p>
-              <p class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price}}€</p>
+          <div class="time">
+            <div class="prices">
+              <p v-if="product.offer" class="text offer"><span class = "title"> Oferta: </span>{{product.offer}}€</p>
+              <p class="text" :class="{offer: !product.offer , price: product.offer}">Precio: {{product.price}}€</p>
+            </div>
           </div>
-          <div class="time">{{ currentDate }}</div>
-          <el-button type="primary" class="button" @click="onAdd" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> Añadir al carrito <i class="material-icons">add_shopping_cart</i></el-button>
+          <div class ="bottom clearfix">
+            <el-button type="primary"
+                class="button"
+                @click="onAdd"
+                :class="{disabled: product.inCart}"
+                :disabled="product.inCart"
+            >
+            <span class = "buttonText"> {{this.buttonText}} </span> <i v-if="!product.inCart" class="material-icons">add_shopping_cart</i>
+            </el-button>
+          </div>
         </div>
       </div>
     </el-card>
@@ -21,26 +29,36 @@
 
 <script>
 
-  export default {
-    data () {
-      return {
-        idKey: this.product.key,
-        targetKey: '#' + this.product.key,
-        shoppingCartProduct: this.product
-      }
-    },
-    name: 'product',
-    components: {
-    },
-    props: ['product'],
-    methods: {
-      onAdd (ev) {
-        ev.preventDefault()
-        ev.stopPropagation()
-        this.$emit('addToCart', this.shoppingCartProduct)
-      }
+let BUTTON_TEXT = {
+  inCart: 'Producto en el carrito',
+  notInCart: 'Añadir producto'
+}
+
+export default {
+  data () {
+    return {
+      idKey: this.product.key,
+      targetKey: '#' + this.product.key,
+      shoppingCartProduct: this.product
+    }
+  },
+  name: 'product',
+  components: {
+  },
+  props: ['product'],
+  computed: {
+    buttonText () {
+      return this.product.inCart ? BUTTON_TEXT.inCart : BUTTON_TEXT.notInCart
+    }
+  },
+  methods: {
+    onAdd (ev) {
+      ev.preventDefault()
+      ev.stopPropagation()
+      this.$emit('addToCart', this.shoppingCartProduct)
     }
   }
+}
 </script>
 <style lang="scss">
   @import "../../assets/styles/base/colors";
@@ -57,10 +75,18 @@
     cursor: default;
 }
 
+.buttonText{
+  font-weight: bold;
+  font-size: 1em;
+  margin-right: 0.3em;
+}
+
 .marginBot{
   margin-bottom: 1em;
 }
-
+.padding{
+  padding: 0.9em;
+}
 .transparent {
   opacity: 0.3;
 }
@@ -75,6 +101,7 @@
     text-align: center;
     font-size: 0.8em;
     width: calc(20% + 5rem);
+    display: inline-block;
 }
 
 .price {
@@ -96,22 +123,25 @@
   top: 10em;
 }
 
+.marginTop{
+  margin-top: 0.5em;
+}
+
 .time {
-  font-size: 13px;
+  font-size: 0.8em;
   color: #999;
 }
 
 .bottom {
-  margin-top: 13px;
-  line-height: 12px;
+  margin-top: 0.8em;
+  line-height: 0.7em;
 }
-
-.button {
-  padding: 0;
-  float: right;
+.button{
+  padding: 0.4em;
 }
 
 .image {
+  margin-top: 0.3em;
   width: 100%;
   display: block;
 }
@@ -123,10 +153,9 @@
 }
 
 .clearfix:after {
-    clear: both
+    clear: both;
 }
 @media (min-width: 500px) {
-
   .prices {
       margin-left: 3em;
   }

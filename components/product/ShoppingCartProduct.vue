@@ -10,8 +10,8 @@
             <p v-if="!product.offer" class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price * product.cuantity}} €</p>
         </div>
           <el-input-number type="number" v-model ="cuantity" :disabled="product.stock <= 0" :min = '0' :max = "product.stock" placeholder="cantidad" aria-describedby="basic-addon1"></el-input-number>
-          <button class = "btn btn-primary" @click="onValueChange" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> <i class="material-icons">add_shopping_cart</i></button>
-        <button type="button" class="btn btn-secondary" @click="onRemove">Eliminar</button>
+          <el-button type = "primary" icon = "el-icon-sold-out" @click="onValueChange" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"></el-button>
+        <el-button type="text" @click="onRemove">Eliminar</el-button>
       </div>
     </div>
 </template>

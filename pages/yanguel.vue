@@ -4,14 +4,14 @@
       <header-component></header-component>
     </el-header>
     <el-main>
-      <el-row>
-        <el-col>
-          <product v-for="product in products" :product="product" :key="product.key" @addToCart="addToCart" @removeFromCart = "removeFromCart"></product>
+      <el-row :gutter="20">
+        <el-col :xs="24" :md="12" :lg ="8" v-for="product in products" :key="product.key" class = "marginTop">
+          <product :product="product"  @addToCart="addToCart" @removeFromCart = "removeFromCart"></product>
         </el-col>
       </el-row>
     </el-main>
     <el-footer>
-    <footer-component></footer-component>
+      <footer-component></footer-component>
     </el-footer>
   </el-container>
 </template>
@@ -42,7 +42,13 @@ export default {
 }
 </script>
 <style lang="scss">
-  .marginTop{
-    top: 0.5em;
+.el-header, .el-footer {
+    background-color: #B3C0D1;
   }
+
+
+.el-main {
+  background-color: #E9EEF3;
+}
+
 </style>
