@@ -14,7 +14,8 @@ export default {
     state.products.find(p => product.key === p.key).inCart = false
   },
   onValueChange (state, product) {
-    console.log(product.cuantity)
+    state.products.find(p => product.key === p.key).stock = state.products.find(p => product.key === p.key).maxStock
+    state.products.find(p => product.key === p.key).stock = parseInt(state.products.find(p => product.key === p.key).stock) - parseInt(product.cuantity)
   }
 
 }
