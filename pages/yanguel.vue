@@ -1,13 +1,19 @@
 <template>
-  <div>
-    <header-component></header-component>
-    <div class = "jumbotron col-xs-12">
-      <div class = "col-md-12 row marginTop">
-        <product v-for="product in products" :product="product" :key="product.key" @addToCart="addToCart" @removeFromCart = "removeFromCart"></product>
-      </div>
-    </div>
+  <el-container>
+    <el-header>
+      <header-component></header-component>
+    </el-header>
+    <el-main>
+      <el-row>
+        <el-col>
+          <product v-for="product in products" :product="product" :key="product.key" @addToCart="addToCart" @removeFromCart = "removeFromCart"></product>
+        </el-col>
+      </el-row>
+    </el-main>
+    <el-footer>
     <footer-component></footer-component>
-  </div>
+    </el-footer>
+  </el-container>
 </template>
 <script>
 import { HeaderComponent, FooterComponent } from '~/components/common'

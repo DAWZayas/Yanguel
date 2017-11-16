@@ -1,40 +1,22 @@
 <template>
-    <div class = "products col-xs-12 col-md-2">
-      <a data-toggle="modal" :data-target = "targetKey" ><img :src="product.src"> </a>
-        <p class="text title"> {{product.name}}</p>
-        <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}</p>
-        <div class="prices row">
-            <p v-if="product.offer" class="text offer">{{product.offer}}€</p>
-            <p class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price}}€</p>
-        </div>
-        <div class = "button-div input-group marginBot">
-          <button class = "btn btn-primary" @click="onAdd" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> Añadir al carrito <i class="material-icons">add_shopping_cart</i></button>
-        </div>
-
-      <div class="modal fade down" :id="idKey" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="productModal">{{product.name}}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Descripción: {{product.description}} <br>
-              Precio: {{product.offer ? product.offer : product.price}}€<br>
-              {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}
-            </div>
-            <div class="modal-footer">
-              <div class = "button-div input-group marginBot">
-                <button class = "btn btn-primary" @click="onAdd" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> Añadir al carrito <i class="material-icons">add_shopping_cart</i></button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
-            </div>
+    <el-card :body-style="{ padding: '0px' }">
+      <a data-toggle="modal" :data-target = "targetKey" >
+        <img :src="product.src" class="image">
+      </a>
+      <div style="padding: 14px;">
+        <span>{{product.name}}</span>
+        <div class="bottom clearfix">
+          <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}</p>
+          <div class="prices row">
+              <p v-if="product.offer" class="text offer">{{product.offer}}€</p>
+              <p class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price}}€</p>
           </div>
+          <div class="time">{{ currentDate }}</div>
+          <el-button type="primary" class="button" @click="onAdd" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"> Añadir al carrito <i class="material-icons">add_shopping_cart</i></el-button>
         </div>
       </div>
-    </div>
+    </el-card>
+
 </template>
 
 <script>
@@ -68,22 +50,6 @@
   @import "../../assets/styles/vendors/bootstrap/variables";
   @import "../../assets/styles/vendors/bootstrap/mixins";
 
-.products {
-    margin-top: 4em;
-    margin-bottom: 2em;
-    margin-left: 3em;
-    margin-right: 0.5em;
-    border-radius: 0.5em;
-    background-color: rgba(207, 203, 203, 0.62);
-    overflow: hidden;
-}
-
-
-.products img {
-    border-radius: 0.5em;
-    width: 100%;
-    margin-top: 0.2em;
-}
 
 .text {
     color: black;
@@ -124,13 +90,40 @@
     float: left;
     font-size: 1.3em;
 }
-.button-div {
-  text-align: center;
-  clear: both;
-}
+
 
 .down{
   top: 10em;
+}
+
+.time {
+  font-size: 13px;
+  color: #999;
+}
+
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+}
+
+.button {
+  padding: 0;
+  float: right;
+}
+
+.image {
+  width: 100%;
+  display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
 }
 @media (min-width: 500px) {
 
