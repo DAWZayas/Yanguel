@@ -8,7 +8,9 @@
         <el-col class = "marginTop" :xs="24" :md="12" :lg ="8" v-for="product in shoppingCart" :key="product.key">
           <shoppingCartProduct  :product="product" @onValueChange="onValueChange" @removeFromCart = "removeFromCart"></shoppingCartProduct>
         </el-col>
-        <el-button v-if="shoppingCart" @click='removeShoppingCart'> Vaciar carrito</el-button>
+      </el-row>
+      <el-row>
+        <el-button class = "marginTop" v-if="shoppingCart" @click='removeShoppingCart'> Vaciar carrito</el-button>
       </el-row>
     </el-main>
     <el-footer>

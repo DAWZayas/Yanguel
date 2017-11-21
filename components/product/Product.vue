@@ -1,17 +1,25 @@
 <template>
     <el-card class = "marginTop" :body-style="{ padding: '0px' }">
-        <img :src="product.src" class="image" type="text" @click="outerVisible = true">
-      <div class = "padding">
-        <div class = "text title">{{product.name}}</div>
-        <div class="bottom clearfix">
-          <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}</p>
-          <div class="time">
-            <div class="prices">
-              <p v-if="product.offer" class="text offer"><span class = "title"> Oferta: </span>{{product.offer}}€</p>
-              <p class="text" :class="{offer: !product.offer , price: product.offer}">Precio: {{product.price}}€</p>
-            </div>
-          </div>
-          <div class ="bottom clearfix">
+      <el-row>
+        <el-row>
+          <el-col>
+            <img :src="product.src" class="image" type="text" @click="outerVisible = true">
+          </el-col>
+        </el-row>
+        <el-row>
+          <p class = "text title">{{product.name}}</p>
+        </el-row>
+        <el-row :gutter="3">
+          <el-col :xs="14" :md="10">
+            <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}</p>
+          </el-col>
+          <el-col :xs="10" :md="14">
+            <p v-if="product.offer" class="text"><span class = "title"> Oferta: </span>{{product.offer}}€</p>
+            <p class="text">Precio: {{product.price}}€</p>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :xs="24" >
             <el-button type="primary"
                 class="button"
                 @click="onAdd"
@@ -20,9 +28,9 @@
             >
             <span class = "buttonText"> {{this.buttonText}} </span> <i v-if="!product.inCart" class="material-icons">add_shopping_cart</i>
             </el-button>
-          </div>
-        </div>
-      </div>
+          </el-col>
+        </el-row>
+      </el-row>
     </el-card>
 
 </template>
@@ -113,6 +121,10 @@ export default {
     display: inline-block;
 }
 
+.justifyCenter{
+  justify-content: space-around;
+}
+
 .price {
     color: #4B4B4B;
     margin-left: 2em;
@@ -152,7 +164,6 @@ export default {
 .image {
   margin-top: 0.3em;
   width: 100%;
-  display: block;
 }
 
 .clearfix:before,
