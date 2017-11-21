@@ -43,7 +43,6 @@ export default {
         key: this.product.key,
         name: this.product.name,
         stock: this.product.stock,
-        inCart: this.product.inCart,
         price: this.product.price,
         offer: this.product.offer ? this.product.offer : null,
         src: this.product.src

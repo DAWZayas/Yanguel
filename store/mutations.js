@@ -9,13 +9,12 @@ export default {
       return
     } else {
       state.shoppingCart.push(product)
-      state.products.find(p => product.key === p.key).inCart = true
+      state.shoppingCart.find(p => product.key === p.key).inCart = true
     }
   },
   removeFromCart (state, product) {
     const index = state.shoppingCart.findIndex(p => product.key === p.key)
     state.shoppingCart.splice(index, 1)
-    state.products.find(p => product.key === p.key).inCart = false
   },
   removeShoppingCart (state) {
     state.shoppingCart = null

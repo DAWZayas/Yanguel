@@ -36,7 +36,16 @@ export default {
     }
     commit('onValueChange', product)
   },
-  removeShoppingCart  ({commit, state}) {
+  removeShoppingCart ({commit, state}) {
+    if (state.shoppingCart) {
+      while (state.shoppingCart.length !== 0) {
+        state.shoppingCart.forEach(product => {
+          console.log(product.key)
+          return commit('removeFromCart', product)
+        }
+        )
+      }
+    }
     commit('removeShoppingCart')
   }
 }
