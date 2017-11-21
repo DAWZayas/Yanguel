@@ -3,7 +3,7 @@ const products = [
     price: '500',
     offer: '',
     stock: 10,
-    description: 'lorem ipsum 1',
+    description: 'Consola de última generación, con la que podrás jugar a tus juegos favoritos sin necesidad de dfsdgfdg',
     src: 'https://media.playstation.com/is/image/SCEA/playstation-4-slim-vertical-product-shot-01-us-07sep16?$TwoColumn_Image$',
     key: 1
   },

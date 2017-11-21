@@ -44,6 +44,7 @@ export default {
         name: this.product.name,
         stock: this.product.stock,
         price: this.product.price,
+        description: this.product.description,
         offer: this.product.offer ? this.product.offer : null,
         src: this.product.src
       }

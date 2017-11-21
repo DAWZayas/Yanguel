@@ -1,19 +1,32 @@
 <template>
-    <div class = "products col-xs-12">
-      <div class = "col-xs-4"><img :src="product.src"></div>
-      <div class = "col-xs-8">
-        <p class="text title"> {{product.name}}</p>
-
-        <div class="prices row" v-if="product.cuantity">
-          <p class = "text clear "> Precio total: </p>
-            <p v-if="product.offer" class="text offer">{{product.offer * product.cuantity}} €</p>
-            <p v-if="!product.offer" class="text" :class="{offer: !product.offer , price: product.offer}">{{product.price * product.cuantity}} €</p>
-        </div>
-          <el-input-number type="number" v-model ="cuantity" :disabled="product.stock <= 0" :min = '0' :max = "product.stock" placeholder="cantidad" aria-describedby="basic-addon1"></el-input-number>
-          <el-button type = "primary" icon = "el-icon-sold-out" @click="onValueChange" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"></el-button>
-        <el-button type="text" @click="onRemove">Eliminar</el-button>
-      </div>
-    </div>
+  <el-card :body-style="{ padding: '0px' }">
+    <el-row>
+      <el-col :xs="8" :md="4">
+        <img :src="product.src" class="img">
+      </el-col>
+      <el-col :xs="16" :md="20">
+        <el-row>
+          <p class="text title">{{product.name}}</p>
+        </el-row>
+        <el-row v-if="product.cuantity">
+           <el-col :xs="10">
+            <p class="text">Precio total:</p>
+          </el-col>
+          <el-col :xs="14">
+            <p v-if="product.offer" class="text">{{product.offer * product.cuantity}} €</p>
+            <p v-if="!product.offer" class="text">{{product.price * product.cuantity}} €</p>
+          </el-col>
+        </el-row>
+        <el-row>
+            <el-input-number type="number" v-model ="cuantity" :disabled="product.stock <= 0" :min = '0' :max = "product.stock" placeholder="cantidad" aria-describedby="basic-addon1"></el-input-number>
+            <el-button type = "primary" icon = "el-icon-sold-out" @click="onValueChange" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"></el-button>
+        </el-row>
+        <el-row>
+          <el-button type="text" @click="onRemove">Eliminar</el-button>
+        </el-row>
+      </el-col>
+    </el-row>
+  </el-card>
 </template>
 
 <script>
@@ -51,6 +64,10 @@
   @import "../../assets/styles/vendors/bootstrap/functions";
   @import "../../assets/styles/vendors/bootstrap/variables";
   @import "../../assets/styles/vendors/bootstrap/mixins";
+
+.img{
+  width: 100%;
+}
 
 .products {
     margin-top: 4em;
@@ -97,19 +114,7 @@
     width: calc(20% + 5rem);
 }
 
-.price {
-    color: #4B4B4B;
-    margin-left: 2em;
-    font-size: 0.8em;
-    float: right;
-    text-decoration: line-through;
-}
 
-.offer {
-    margin-left: -1em;
-    float: left;
-    font-size: 1.3em;
-}
 .button-div {
   text-align: center;
   clear: both;

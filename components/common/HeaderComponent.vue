@@ -39,48 +39,4 @@
   @import "../../assets/styles/vendors/bootstrap/variables";
   @import "../../assets/styles/vendors/bootstrap/mixins";
 
-  .header {
-    display: block;
-    padding: 1em 0.5em;
-    width: 100%;
-    color: #fff;
-    background-color: $color-lp-primary;
-    position:fixed;
-    color: $color-primary;
-    z-index: 9999;
-
-    @include media-breakpoint-down(md) {
-      height: auto;
-      min-height: $header-md-height;
-      background-color: $color-lp-primary;
-    }
-    .nuxt-link-active {
-      font-weight: bold;
-    }
-    .nav-link {
-      color: $color-primary;
-      cursor: pointer;
-
-      @include media-breakpoint-down(md) {
-        padding-right: 0;
-        padding-left: 0;
-      }
-      &:hover,
-      &:active,
-      &:focus {
-        color: $color-primary;
-      }
-      &.disabled {
-        cursor: default;
-        color: $nav-link-disabled-color;
-      }
-    }
-    .buttons-holder {
-      margin-left: 60px;
-
-      @include media-breakpoint-down(md) {
-        margin-left: 0;
-      }
-    }
-  }
 </style>
