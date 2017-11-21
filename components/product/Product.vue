@@ -23,10 +23,10 @@
             <el-button type="primary"
                 class="button"
                 @click="onAdd"
-                :class="{disabled: product.inCart}"
-                :disabled="product.inCart"
+                :class="{disabled: product.stock === 0}"
+                :disabled="product.stock === 0"
             >
-            <span class = "buttonText"> {{this.buttonText}} </span> <i v-if="!product.inCart" class="material-icons">add_shopping_cart</i>
+            <span class = "buttonText"> {{this.buttonText}} </span> <i v-if="product.stock !== 0" class="material-icons">add_shopping_cart</i>
             </el-button>
           </el-col>
         </el-row>
@@ -38,8 +38,8 @@
 <script>
 
 let BUTTON_TEXT = {
-  inCart: 'Producto en el carrito',
-  notInCart: 'Añadir producto'
+  onSale: 'Producto agotado',
+  sold: 'Añadir producto'
 }
 
 export default {
@@ -65,7 +65,7 @@ export default {
   props: ['product'],
   computed: {
     buttonText () {
-      return this.product.inCart ? BUTTON_TEXT.inCart : BUTTON_TEXT.notInCart
+      return this.product.stock === 0 ? BUTTON_TEXT.onSale : BUTTON_TEXT.sold
     }
   },
   methods: {
