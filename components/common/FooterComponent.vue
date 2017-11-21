@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="container">
+    <div class="footerContainer">
       <span class="copyright">&copy; 2017 Yanguel</span>
       <span class="fact">A new web to buy online.</span>
     </div>
@@ -24,11 +24,9 @@
     min-height: $footer-height;
     padding: 0.9em 0.6em;
 
-    .container {
+    .footerContainer {
       @extend .center-content;
       @include justify-content(space-between);
-      height: 100%;
-      min-height: 1.9em;
       font-weight: lighter;
       color: $color-grey2;
 
@@ -40,6 +38,7 @@
     .copyright,
     .author {
       width: 150px;
+      margin-right:0.7em;
     }
     .copyright,
     .fact,

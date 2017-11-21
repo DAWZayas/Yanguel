@@ -1,36 +1,26 @@
 <template>
-  <header class="header">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light row">
-        <div class="navbar-brand">
-          <logo></logo>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarHeader">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <nuxt-link class="nav-link" to="/"><i class="material-icons">home</i> Home</nuxt-link>
-            </li>
-            <li class="nav-item">
-              <nuxt-link class="nav-link" to="profile"><i class="material-icons">perm_identity</i> Profile</nuxt-link>
-            </li>
-            <li class="nav-item">
-              <nuxt-link class="nav-link" to="login"> <i class="material-icons">account_circle</i> LogIn</nuxt-link>
-            </li>
-             <li class="nav-item">
-              <nuxt-link class="nav-link" to="cart"> <i class="material-icons">shopping_cart</i> Show Cart</nuxt-link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </header>
+  <el-menu
+    :default-active="activeIndex"
+    class="el-menu-demo"
+    mode="horizontal"
+    background-color="#545c64"
+    text-color="#fff"
+    active-text-color="#ffd04b">
+    <el-menu-item index="1"><nuxt-link class="nav-link" to="/"> Home</nuxt-link></el-menu-item>
+    <el-menu-item v-if="user" index="2"> Profile</nuxt-link></el-menu-item>
+    <el-menu-item v-else index="2"> <nuxt-link class="nav-link" to="login"> LogIn</nuxt-link> </el-menu-item>
+    <el-menu-item index="3"><nuxt-link class="nav-link" to="cart">  Show cart<i class="el-icon-goods"></i></nuxt-link></el-menu-item>
+  </el-menu>
 </template>
 
 <script>
   export default {
+    data () {
+      return {
+        activeIndex: '1',
+        user: 'Pepe'
+      }
+    },
     name: 'header-component',
     components: {
     },
@@ -52,7 +42,7 @@
   .header {
     display: block;
     padding: 1em 0.5em;
-    width: 100vw;
+    width: 100%;
     color: #fff;
     background-color: $color-lp-primary;
     position:fixed;
@@ -63,9 +53,6 @@
       height: auto;
       min-height: $header-md-height;
       background-color: $color-lp-primary;
-    }
-    .container {
-      height: 100%;
     }
     .nuxt-link-active {
       font-weight: bold;
