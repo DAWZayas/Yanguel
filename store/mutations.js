@@ -23,7 +23,7 @@ export default {
     state.shoppingCart.find(p => product.key === p.key).virtualStock = parseInt(state.products.find(p => product.key === p.key).stock) - parseInt(product.cuantity)
   },
   setProductStock (state, product) {
-    state.product.find(p => product.key === p.key).stock = parseInt(state.product.find(p => product.key === p.key).stock) - parseInt(product.cuantity)
+    state.products.find(p => product.key === p.key).stock = parseInt(state.products.find(p => product.key === p.key).stock) - parseInt(product.cuantity)
   }
 
 }

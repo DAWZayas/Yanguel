@@ -10,6 +10,7 @@
         </el-col>
       </el-row>
       <el-row>
+        <el-button class = "marginTop" v-if="shoppingCart" @click='buyShoppingCart'> Comprar carrito</el-button>
         <el-button class = "marginTop" v-if="shoppingCart" @click='removeShoppingCart'> Vaciar carrito</el-button>
       </el-row>
     </el-main>
@@ -40,7 +41,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['onValueChange', 'removeFromCart', 'removeShoppingCart'])
+    ...mapActions(['onValueChange', 'removeFromCart', 'removeShoppingCart', 'buyShoppingCart'])
   }
 }
 </script>

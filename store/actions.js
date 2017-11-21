@@ -41,10 +41,15 @@ export default {
     commit('onValueChange', product)
   },
   removeShoppingCart ({commit, state}) {
+    commit('removeShoppingCart')
+  },
+  buyShoppingCart ({commit, state}) {
     if (state.shoppingCart) {
-      while (state.shoppingCart.length !== 0) {
-        state.shoppingCart.forEach(product => commit('removeFromCart', product))
-      }
+      state.shoppingCart.forEach(product => {
+        if (product.cuantity) {
+          commit('setProductStock', product)
+        }
+      })
     }
     commit('removeShoppingCart')
   }
