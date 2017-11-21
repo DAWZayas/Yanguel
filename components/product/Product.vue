@@ -1,6 +1,6 @@
 <template>
     <el-card class = "marginTop" :body-style="{ padding: '0px' }">
-        <img :src="product.src" class="image">
+        <img :src="product.src" class="image" type="text" @click="outerVisible = true">
       <div class = "padding">
         <div class = "text title">{{product.name}}</div>
         <div class="bottom clearfix">
@@ -39,7 +39,16 @@ export default {
     return {
       idKey: this.product.key,
       targetKey: '#' + this.product.key,
-      shoppingCartProduct: this.product
+      shoppingCartProduct: {
+        key: this.product.key,
+        name: this.product.name,
+        stock: this.product.stock,
+        inCart: this.product.inCart,
+        price: this.product.price,
+        offer: this.product.offer ? this.product.offer : null,
+        src: this.product.src
+      }
+
     }
   },
   name: 'product',

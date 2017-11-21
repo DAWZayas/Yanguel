@@ -2,10 +2,12 @@
 import firebase from 'firebase'
 
 let config = {
-  apiKey: 'apiKey',
-  databaseURL: 'https://example.firebaseio.com',
-  authDomain: 'example.firebaseapp.com',
-  storageBucket: 'gs://example.appspot.com'
+  apiKey: 'AIzaSyCg3sSnIyn1ClrqSRoy4zSjOgIWUP1S8kM',
+  authDomain: 'yanguel-2d8e7.firebaseapp.com',
+  databaseURL: 'https://yanguel-2d8e7.firebaseio.com',
+  projectId: 'yanguel-2d8e7',
+  storageBucket: 'yanguel-2d8e7.appspot.com',
+  messagingSenderId: '366483520995'
 }
 
 let firebaseApp

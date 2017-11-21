@@ -8,7 +8,11 @@ export default {
     if (!product) {
       return
     }
-    commit('addToCart', product)
+    if (state.shoppingCart) {
+      commit('addToCart', product)
+    } else {
+      commit('setShoppingCart', product)
+    }
   },
    /**
    * remove product to the shopping cart
