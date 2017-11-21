@@ -23,7 +23,7 @@ export default {
     if (!product) {
       return
     }
-    if (state.shoppingCart.length === 1){
+    if (state.shoppingCart.length === 1) {
       commit('removeShoppingCart')
     } else {
       commit('removeFromCart', product)
@@ -43,11 +43,7 @@ export default {
   removeShoppingCart ({commit, state}) {
     if (state.shoppingCart) {
       while (state.shoppingCart.length !== 0) {
-        state.shoppingCart.forEach(product => {
-          console.log(product.key)
-          return commit('removeFromCart', product)
-        }
-        )
+        state.shoppingCart.forEach(product => commit('removeFromCart', product))
       }
     }
     commit('removeShoppingCart')
