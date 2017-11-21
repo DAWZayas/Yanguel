@@ -4,14 +4,15 @@
       <header-component></header-component>
     </el-header>
     <el-main>
-      <el-row>
-        <el-col class = "marginTop">
-          <shoppingCartProduct v-for="product in shoppingCart" :product="product" :key="product.key" @onValueChange="onValueChange" @removeFromCart = "removeFromCart"></shoppingCartProduct>
+      <el-row :gutter="20">
+        <el-col class = "marginTop" :xs="24" :md="12" :lg ="8" v-for="product in shoppingCart" :key="product.key">
+          <shoppingCartProduct  :product="product" @onValueChange="onValueChange" @removeFromCart = "removeFromCart"></shoppingCartProduct>
         </el-col>
+        <el-button  :disabled="!shoppingCart" @click='removeShoppingCart'> :D </el-button>
       </el-row>
     </el-main>
     <el-footer>
-    <footer-component></footer-component>
+      <footer-component></footer-component>
     </el-footer>
   </el-container>
 </template>
@@ -37,7 +38,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['onValueChange', 'removeFromCart'])
+    ...mapActions(['onValueChange', 'removeFromCart', 'removeShoppingCart'])
   }
 }
 </script>

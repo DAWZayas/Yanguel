@@ -35,5 +35,8 @@ export default {
       return
     }
     commit('onValueChange', product)
+  },
+  removeShoppingCart  ({commit, state}) {
+    commit('removeShoppingCart')
   }
 }

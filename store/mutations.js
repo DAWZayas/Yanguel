@@ -1,4 +1,9 @@
 export default {
+  setShoppingCart (state, product) {
+    state.shoppingCart = []
+    state.shoppingCart.push(product)
+    state.products.find(p => product.key === p.key).inCart = true
+  },
   addToCart (state, product) {
     if (state.shoppingCart && state.shoppingCart.find(p => product.key === p.key)) {
       return
@@ -18,10 +23,8 @@ export default {
   onValueChange (state, product) {
     state.shoppingCart.find(p => product.key === p.key).virtualStock = parseInt(state.products.find(p => product.key === p.key).stock) - parseInt(product.cuantity)
   },
-  setShoppingCart (state, product) {
-    state.shoppingCart = []
-    state.shoppingCart.push(product)
-    state.products.find(p => product.key === p.key).inCart = true
+  setProductStock (state, product) {
+    state.product.find(p => product.key === p.key).stock = parseInt(state.product.find(p => product.key === p.key).stock) - parseInt(product.cuantity)
   }
 
 }
