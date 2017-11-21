@@ -2,7 +2,7 @@ export default {
   setShoppingCart (state, product) {
     state.shoppingCart = []
     state.shoppingCart.push(product)
-    state.products.find(p => product.key === p.key).inCart = true
+    state.shoppingCart.find(p => product.key === p.key).inCart = true
   },
   addToCart (state, product) {
     if (state.shoppingCart && state.shoppingCart.find(p => product.key === p.key)) {

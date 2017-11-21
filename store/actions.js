@@ -23,7 +23,11 @@ export default {
     if (!product) {
       return
     }
-    commit('removeFromCart', product)
+    if (state.shoppingCart.length === 1){
+      commit('removeShoppingCart')
+    } else {
+      commit('removeFromCart', product)
+    }
   },
   /**
    * change value from a product in the shopping cart
