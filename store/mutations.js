@@ -2,14 +2,12 @@ export default {
   setShoppingCart (state, product) {
     state.shoppingCart = []
     state.shoppingCart.push(product)
-    console.log(state.shoppingCart)
   },
   addToCart (state, product) {
     if (state.shoppingCart && state.shoppingCart.find(p => product.key === p.key)) {
       return
     } else {
       state.shoppingCart.push(product)
-      console.log(state.shoppingCart)
     }
   },
   removeFromCart (state, product) {
