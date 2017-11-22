@@ -8,6 +8,7 @@
         <el-col :xs="24" :md="12" :lg ="8" v-for="product in products" :key="product.key" class = "marginTop">
           <product :product="product"  @addToCart="addToCart" @removeFromCart = "removeFromCart"></product>
         </el-col>
+        <button-add-component></button-add-component>
       </el-row>
     </el-main>
     <el-footer>
@@ -17,7 +18,7 @@
 </template>
 <script>
 import { HeaderComponent, FooterComponent } from '~/components/common'
-import { Product } from '~/components/product'
+import { Product, buttonAddComponent } from '~/components/product'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -28,7 +29,8 @@ export default {
   components: {
     FooterComponent,
     HeaderComponent,
-    Product
+    Product,
+    buttonAddComponent
   },
   computed: {
     ...mapGetters({

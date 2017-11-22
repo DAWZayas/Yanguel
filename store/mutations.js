@@ -25,9 +25,6 @@ export default {
   setProductStock (state, product) {
     state.products.find(p => product.key === p.key).stock = parseInt(state.products.find(p => product.key === p.key).stock) - parseInt(product.cuantity)
   },
-  addProduct (state, product) {
-    state.products.push(product)
-  },
   setProductsRef (state, value) {
     state.productsRef = value
   }
