@@ -25,6 +25,7 @@
                 @click="onAdd"
                 :class="{disabled: product.stock === 0}"
                 :disabled="product.stock === 0"
+                size = "small"
             >
             <span class = "buttonText"> {{this.buttonText}} </span> <i v-if="product.stock !== 0" class="material-icons">add_shopping_cart</i>
             </el-button>
