@@ -12,7 +12,7 @@
     <el-form-item label="Price">
       <el-input-number size = "medium" controls-position = "right" v-model="price"></el-input-number>
     </el-form-item>
-    <el-form-item label="Price">
+    <el-form-item label="Offer">
       <el-input-number size = "medium" controls-position = "right" v-model="offer"></el-input-number>
     </el-form-item>
     <el-form-item label="Stock">
@@ -20,12 +20,12 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">Create</el-button>
-      <el-button>Cancel</el-button>
+      <el-button type="danger" @click="onCancel">Cancel</el-button>
     </el-form-item>
   </el-form>
 </template>
 <script>
-
+  import {mapActions} from 'vuex'
   export default {
     data () {
       return {
@@ -39,18 +39,34 @@
       }
     },
     methods: {
-      onSubmit (ev) {
+      ...mapActions(['addProduct']),
+      reset () {
+        this.name = ''
+        this.description = ''
+        this.url = ''
+        this.price = ''
+        this.offer = ''
+        this.stock = ''
+      },
+      onCancel (ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        const product = {
+        this.reset()
+      },
+      onSubmit (ev) {
+        this.isCreating = true
+        ev.preventDefault()
+        ev.stopPropagation()
+        this.addProduct({
           name: this.name,
           description: this.description,
-          url: this.url,
+          src: this.url,
           price: this.price,
           offer: this.offer,
-          stock: this.stock
-        }
-        this.$emit('addProduct', product)
+          stock: this.stock}).then(() => {
+            this.reset()
+            this.isCreating = false
+          })
       }
     }
   }
