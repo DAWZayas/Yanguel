@@ -7,8 +7,7 @@
     text-color="#fff"
     active-text-color="#ffd04b">
     <el-menu-item index="1"><nuxt-link class="nav-link" to="/"> Home</nuxt-link></el-menu-item>
-    <el-menu-item v-if="user" index="2"> Profile</nuxt-link></el-menu-item>
-    <el-menu-item v-else index="2"> <nuxt-link class="nav-link" to="login"> LogIn</nuxt-link> </el-menu-item>
+    <el-menu-item index="2"> <nuxt-link class="nav-link" to="login"> LogIn</nuxt-link> </el-menu-item>
     <el-menu-item index="3"><nuxt-link class="nav-link" to="cart">  Show cart<i class="el-icon-goods"></i></nuxt-link></el-menu-item>
   </el-menu>
 </template>
@@ -17,8 +16,7 @@
   export default {
     data () {
       return {
-        activeIndex: '1',
-        user: 'Pepe'
+        activeIndex: '1'
       }
     },
     name: 'header-component',
