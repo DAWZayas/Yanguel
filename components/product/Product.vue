@@ -49,7 +49,7 @@ export default {
       idKey: this.product.key,
       targetKey: '#' + this.product.key,
       shoppingCartProduct: {
-        key: this.product.key,
+        key: this.product['.key'],
         name: this.product.name,
         stock: this.product.stock,
         price: this.product.price,
