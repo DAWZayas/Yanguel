@@ -66,7 +66,15 @@
           stock: this.stock}).then(() => {
             this.reset()
             this.isCreating = false
+            this.onSuccess()
           })
+      },
+      onSuccess () {
+        this.$message({
+          message: 'Product added correctly.',
+          type: 'success',
+          center: true
+        })
       }
     }
   }

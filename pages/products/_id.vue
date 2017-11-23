@@ -1,11 +1,21 @@
 <template>
-  <div>
-    <product :product="this.product"></product>
-  </div>
+  <el-container>
+    <el-header>
+      <header-component></header-component>
+    </el-header>
+    <el-main>
+      <productDetails :product="this.product"></productDetails>
+    </el-main>
+    <el-footer>
+      <footer-component></footer-component>
+    </el-footer>
+  </el-container>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { Product } from '~/components/product'
+import { HeaderComponent, FooterComponent } from '~/components/common'
+import { ProductDetails } from '~/components/product'
+
 export default {
   data () {
     return {
@@ -13,7 +23,9 @@ export default {
     }
   },
   components: {
-    Product
+    ProductDetails,
+    FooterComponent,
+    HeaderComponent
   },
   methods: {
     ...mapActions(['bindProducts']),
