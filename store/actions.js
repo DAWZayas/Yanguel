@@ -50,14 +50,11 @@ export default {
   buyShoppingCart ({commit, state}) {
     if (state.shoppingCart) {
       let updates = {}
-      console.log(updates)
       let newStock
       state.shoppingCart.forEach(product => {
         if (product.cuantity) {
-          console.log(updates)
           newStock = parseInt(product.stock) - parseInt(product.cuantity)
-          updates['/products/' + product.key] = {stock: newStock}
-          console.log(updates['/products/' + product.key])
+          updates['/products/' + product.key + '/stock'] = newStock
         }
       })
       firebaseApp.database().ref().update(updates)
