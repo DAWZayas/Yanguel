@@ -7,7 +7,7 @@
     text-color="#fff"
     active-text-color="#ffd04b">
     <el-menu-item index="1"><nuxt-link class="nav-link" to="/">Home</nuxt-link></el-menu-item>
-    <el-menu-item index="2"><nuxt-link class="nav-link" to="cart">SC</nuxt-link></el-menu-item>
+    <el-menu-item index="2"><nuxt-link class="nav-link" to="/cart">SC</nuxt-link></el-menu-item>
   </el-menu>
 </template>
 
