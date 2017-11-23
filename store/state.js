@@ -1,5 +1,4 @@
-const products = [
-]
+const products = []
 const productsRef = null
 const shoppingCart = null
 

@@ -3,7 +3,7 @@
       <el-row>
         <el-row>
           <el-col>
-            <img :src="product.src" class="image" type="text" @click="outerVisible = true">
+            <nuxt-link :to="'/products/' + product['.key']" ><img :src="product.src" class="image" type="text" @click="outerVisible = true"></nuxt-link>
           </el-col>
         </el-row>
         <el-row>
