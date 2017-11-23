@@ -21,7 +21,31 @@
           <el-col :xs="14"><p> {{product.description}} </p></el-col>
         </el-row>
         <el-row>
-          <el-button type="text" @click="onRemove">Eliminar</el-button>
+          <el-dialog title="Product Editing" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+              <el-form-item label="Promotion name" :label-width="formLabelWidth">
+                <el-input v-model="form.name" auto-complete="off"></el-input>
+              </el-form-item>
+              <el-form-item label="Zones" :label-width="formLabelWidth">
+                <el-select v-model="form.region" placeholder="Please select a zone">
+                  <el-option label="Zone No.1" value="shanghai"></el-option>
+                  <el-option label="Zone No.2" value="beijing"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogFormVisible = false">Cancel</el-button>
+              <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
+            </span>
+          </el-dialog>
+        </el-row>
+        <el-row>
+          <el-col :xs="12">
+            <el-button v-if="admin" type="text" @click="dialogFormVisible = true">Editar</el-button>
+          </el-col>
+          <el-col :xs="12">
+            <el-button v-if="admin" type="text" @click="onRemove">Eliminar</el-button>
+          </el-col>
         </el-row>
       </el-col>
     </el-row>
@@ -32,7 +56,18 @@
     data () {
       return {
         cuantity: 0,
-        shoppingCartProduct: this.product
+        admin: true,
+        dialogFormVisible: false,
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
       }
     },
     name: 'productDetails',
