@@ -46,9 +46,6 @@ export default {
     this.bindProducts()
     this.getProduct()
     this.bindProduct(this.product)
-  },
-  destroy () {
-    this.unbindProductReference()
   }
 
 }

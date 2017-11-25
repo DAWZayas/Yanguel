@@ -122,11 +122,9 @@
         this.$emit('removeFromCart', this.shoppingCartProduct)
       }
     },
-    created () {
-      this.bindProduct(this.product)
-    },
     destroy () {
       this.unbindProductReference()
+      console.log(':D')
     }
   }
 </script>
