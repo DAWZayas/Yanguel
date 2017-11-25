@@ -23,19 +23,28 @@
         <el-row>
           <el-dialog title="Product Editing" :visible.sync="dialogFormVisible">
             <el-form :model="form">
-              <el-form-item label="Promotion name" :label-width="formLabelWidth">
+              <el-form-item label="Product name">
                 <el-input v-model="form.name" auto-complete="off"></el-input>
               </el-form-item>
-              <el-form-item label="Zones" :label-width="formLabelWidth">
-                <el-select v-model="form.region" placeholder="Please select a zone">
-                  <el-option label="Zone No.1" value="shanghai"></el-option>
-                  <el-option label="Zone No.2" value="beijing"></el-option>
-                </el-select>
+              <el-form-item label="Stock">
+                <el-input-number size = "small" controls-position = "right" v-model="form.stock" placeholder="Please set the stock"></el-input-number>
+              </el-form-item>
+              <el-form-item label="Price">
+                <el-input-number size = "small" controls-position = "right" v-model="form.price" placeholder="Please select a price"></el-input-number>
+              </el-form-item>
+              <el-form-item label="Offer">
+                <el-input-number size = "small" controls-position = "right" v-model="form.offer" placeholder="Please select the offer"></el-input-number>
+              </el-form-item>
+              <el-form-item label="Image">
+                <el-input v-model="form.src" placeholder="Please select a img"></el-input>
+              </el-form-item>
+              <el-form-item label="Description">
+                <el-input v-model="form.description" placeholder="Please set the product description"></el-input>
               </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
+              <el-button type="primary" @click="onProductEdit">Confirm</el-button>
               <el-button @click="dialogFormVisible = false">Cancel</el-button>
-              <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
             </span>
           </el-dialog>
         </el-row>
@@ -52,6 +61,7 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   export default {
     data () {
       return {
@@ -60,13 +70,14 @@
         dialogFormVisible: false,
         form: {
           name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          price: 0,
+          offer: 0,
+          src: '',
+          description: '',
+          stock: 0
+        },
+        editProduct: {
+          key: this.product['.key']
         }
       }
     },
@@ -75,12 +86,33 @@
     },
     props: ['product'],
     methods: {
-      onValueChange (ev) {
+      ...mapActions(['modifyProduct']),
+      reset () {
+        this.form.name = ''
+        this.form.description = ''
+        this.form.src = ''
+        this.form.price = 0
+        this.form.offer = 0
+        this.form.stock = 0
+      },
+      onCancel (ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        this.shoppingCartProduct.cuantity = parseInt(this.cuantity)
-        this.shoppingCartProduct.cuantity !== 0 ? this.$emit('onValueChange', this.shoppingCartProduct) : this.$emit('removeFromCart', this.shoppingCartProduct)
-        this.cuantity = 0
+        this.reset()
+      },
+      onProductEdit (ev) {
+        ev.preventDefault()
+        ev.stopPropagation()
+        this.form.name !== '' ? this.editProduct.name = this.form.name : this.editProduct.name = this.product.name
+        this.form.price > 0 ? this.editProduct.price = this.form.price : this.editProduct.price = this.product.price
+        this.form.offer < this.form.price ? this.editProduct.offer = this.form.offer : this.editProduct.offer = 0
+        this.form.src !== '' ? this.editProduct.src = this.form.src : this.editProduct.src = this.product.src
+        this.form.description !== '' ? this.editProduct.description = this.form.description : this.editProduct.description = this.product.description
+        this.form.stock > 0 ? this.editProduct.stock = this.form.stock : this.editProduct.stock = 0
+
+        this.modifyProduct(this.editProduct)
+        this.reset()
+        this.dialogFormVisible = false
       },
       onRemove (ev) {
         ev.preventDefault()

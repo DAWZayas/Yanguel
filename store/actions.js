@@ -70,6 +70,14 @@ export default {
     updates['/products/' + newProductKey] = product
     return firebaseApp.database().ref().update(updates)
   },
+  modifyProduct ({commit, state}, product) {
+    if (!product) {
+      return
+    }
+    let updates = {}
+    updates['/products/' + product.key] = product
+    return firebaseApp.database().ref().update(updates)
+  },
   bindProducts: firebaseAction(({commit, dispatch}) => {
     let db = firebaseApp.database()
     let productsRef = db.ref('/products')
