@@ -86,7 +86,7 @@
     },
     props: ['product'],
     methods: {
-      ...mapActions(['modifyProduct']),
+      ...mapActions(['modifyProduct', 'bindProduct', 'unbindProductReference']),
       reset () {
         this.form.name = ''
         this.form.description = ''
@@ -100,16 +100,18 @@
         ev.stopPropagation()
         this.reset()
       },
-      onProductEdit (ev) {
-        ev.preventDefault()
-        ev.stopPropagation()
+      asignValues () {
         this.form.name !== '' ? this.editProduct.name = this.form.name : this.editProduct.name = this.product.name
         this.form.price > 0 ? this.editProduct.price = this.form.price : this.editProduct.price = this.product.price
         this.form.offer < this.form.price ? this.editProduct.offer = this.form.offer : this.editProduct.offer = 0
         this.form.src !== '' ? this.editProduct.src = this.form.src : this.editProduct.src = this.product.src
         this.form.description !== '' ? this.editProduct.description = this.form.description : this.editProduct.description = this.product.description
-        this.form.stock > 0 ? this.editProduct.stock = this.form.stock : this.editProduct.stock = 0
-
+        this.form.stock > 0 ? this.editProduct.stock = this.form.stock : this.editProduct.stock = this.product.stock
+      },
+      onProductEdit (ev) {
+        ev.preventDefault()
+        ev.stopPropagation()
+        this.asignValues()
         this.modifyProduct(this.editProduct)
         this.reset()
         this.dialogFormVisible = false
@@ -119,6 +121,12 @@
         ev.stopPropagation()
         this.$emit('removeFromCart', this.shoppingCartProduct)
       }
+    },
+    created () {
+      this.bindProduct(this.product)
+    },
+    destroy () {
+      this.unbindProductReference()
     }
   }
 </script>

@@ -28,7 +28,7 @@ export default {
     HeaderComponent
   },
   methods: {
-    ...mapActions(['bindProducts']),
+    ...mapActions(['bindProducts', 'bindProduct', 'unbindProductReference']),
     getProduct () {
       this.products.forEach(p => {
         if (p['.key'] === this.$route.params.id) {
@@ -45,7 +45,12 @@ export default {
   created () {
     this.bindProducts()
     this.getProduct()
+    this.bindProduct(this.product)
+  },
+  destroy () {
+    this.unbindProductReference()
   }
+
 }
 </script>
 <style lang="scss">

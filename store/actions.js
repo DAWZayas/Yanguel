@@ -85,6 +85,13 @@ export default {
       commit('setProductsRef', productsRef)
     })
   }),
+  bindProduct: firebaseAction(({commit, dispatch}, product) => {
+    let db = firebaseApp.database()
+    let productRef = db.ref('/products/' + product.key)
+    dispatch('bindFirebaseReference', {reference: productRef, toBind: 'product'}).then(() => {
+      commit('setProductRef', productRef)
+    })
+  }),
   bindFirebaseReference: firebaseAction(({bindFirebaseRef, state}, {reference, toBind}) => {
     return reference.once('value').then(snapshot => {
       if (!snapshot.val()) {
@@ -98,6 +105,14 @@ export default {
   /**
    * Undbinds firebase references
    */
+  unbindProductReference: firebaseAction(({unbindFirebaseRef, commit}) => {
+    commit('setProductRef', null)
+    try {
+      unbindFirebaseRef('product')
+    } catch (error) {
+      return
+    }
+  }),
   unbindFirebaseReferences: firebaseAction(({unbindFirebaseRef, commit}) => {
     commit('setConfigRef', null)
     commit('setStatisticsRef', null)
