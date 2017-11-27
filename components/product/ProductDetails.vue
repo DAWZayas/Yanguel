@@ -69,15 +69,15 @@
         admin: true,
         dialogFormVisible: false,
         form: {
-          name: '',
-          price: 0,
-          offer: 0,
+          name: this.product.name,
+          price: this.product.price,
+          offer: this.product.offer,
           src: '',
           description: '',
-          stock: 0
+          stock: this.product.stock
         },
         editProduct: {
-          key: this.product['.key']
+          '.key': this.product['.key']
         }
       }
     },
@@ -88,12 +88,12 @@
     methods: {
       ...mapActions(['modifyProduct', 'bindProduct', 'unbindProductReference']),
       reset () {
-        this.form.name = ''
+        this.form.name = this.product.name
         this.form.description = ''
         this.form.src = ''
-        this.form.price = 0
-        this.form.offer = 0
-        this.form.stock = 0
+        this.form.price = this.product.price
+        this.form.offer = this.product.offer
+        this.form.stock = this.product.stock
       },
       onCancel (ev) {
         ev.preventDefault()
@@ -103,7 +103,7 @@
       asignValues () {
         this.form.name !== '' ? this.editProduct.name = this.form.name : this.editProduct.name = this.product.name
         this.form.price > 0 ? this.editProduct.price = this.form.price : this.editProduct.price = this.product.price
-        this.form.offer < this.form.price ? this.editProduct.offer = this.form.offer : this.editProduct.offer = 0
+        this.form.offer > this.form.price ? this.editProduct.offer = this.form.offer : this.editProduct.offer = 0
         this.form.src !== '' ? this.editProduct.src = this.form.src : this.editProduct.src = this.product.src
         this.form.description !== '' ? this.editProduct.description = this.form.description : this.editProduct.description = this.product.description
         this.form.stock > 0 ? this.editProduct.stock = this.form.stock : this.editProduct.stock = this.product.stock
@@ -114,15 +114,26 @@
         this.asignValues()
         this.modifyProduct(this.editProduct)
         this.reset()
+        this.onSuccess()
         this.dialogFormVisible = false
       },
       onRemove (ev) {
         ev.preventDefault()
         ev.stopPropagation()
         this.$emit('removeFromCart', this.shoppingCartProduct)
+      },
+      onSuccess () {
+        this.$message({
+          message: 'Product edited correctly.',
+          type: 'success',
+          center: true
+        })
       }
     },
-    destroy () {
+    created () {
+      this.bindProduct(this.product)
+    },
+    unmount () {
       this.unbindProductReference()
       console.log(':D')
     }

@@ -33,6 +33,7 @@ export default {
       this.products.forEach(p => {
         if (p['.key'] === this.$route.params.id) {
           this.product = p
+          console.log(this.product)
         }
       })
     }
@@ -45,7 +46,6 @@ export default {
   created () {
     this.bindProducts()
     this.getProduct()
-    this.bindProduct(this.product)
   }
 
 }

@@ -66,17 +66,23 @@ export default {
       return
     }
     let newProductKey = state.productsRef.push().key
-    let updates = {}
-    updates['/products/' + newProductKey] = product
-    return firebaseApp.database().ref().update(updates)
+    return firebaseApp.database().ref('/products/' + newProductKey).update(product)
   },
   modifyProduct ({commit, state}, product) {
     if (!product) {
       return
     }
-    let updates = {}
-    updates['/products/' + product.key] = product
-    return firebaseApp.database().ref().update(updates)
+    const updateProduct = {
+      name: product.name,
+      src: product.src,
+      stock: product.stock,
+      offer: product.offer,
+      description: product.description,
+      price: product.price
+    }
+    const reference = '/products/' + product['.key']
+    console.log(reference)
+    return firebaseApp.database().ref(reference).update(updateProduct)
   },
   bindProducts: firebaseAction(({commit, dispatch}) => {
     let db = firebaseApp.database()
@@ -87,7 +93,7 @@ export default {
   }),
   bindProduct: firebaseAction(({commit, dispatch}, product) => {
     let db = firebaseApp.database()
-    let productRef = db.ref('/products/' + product.key)
+    let productRef = db.ref('/products/' + product['.key'])
     dispatch('bindFirebaseReference', {reference: productRef, toBind: 'product'}).then(() => {
       commit('setProductRef', productRef)
     })
