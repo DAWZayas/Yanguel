@@ -4,14 +4,14 @@
       <header-component></header-component>
     </el-header>
     <el-main>
+      <el-row>
+        <el-button class = "marginTop" v-if="shoppingCart" @click='buyShoppingCart'> Comprar carrito</el-button>
+        <el-button class = "marginTop" v-if="shoppingCart" @click='removeShoppingCart'> Vaciar carrito</el-button>
+      </el-row>
       <el-row :gutter="20">
         <el-col class = "marginTop" :xs="24" :md="12" :lg ="8" v-for="product in shoppingCart" :key="product.key">
           <shoppingCartProduct  :product="product" @onValueChange="onValueChange" @removeFromCart = "removeFromCart"></shoppingCartProduct>
         </el-col>
-      </el-row>
-      <el-row>
-        <el-button class = "marginTop" v-if="shoppingCart" @click='buyShoppingCart'> Comprar carrito</el-button>
-        <el-button class = "marginTop" v-if="shoppingCart" @click='removeShoppingCart'> Vaciar carrito</el-button>
       </el-row>
     </el-main>
     <el-footer>

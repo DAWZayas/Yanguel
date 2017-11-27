@@ -5,10 +5,17 @@
 </template>
 <script>
   import yanguel from '~/pages/yanguel'
+  import { mapActions } from 'vuex'
   export default {
     data () {
       return {}
     },
-    components: {yanguel}
+    components: {yanguel},
+    methods: {
+      ...mapActions(['bindProducts'])
+    },
+    created () {
+      this.bindProducts()
+    }
   }
 </script>

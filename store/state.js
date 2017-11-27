@@ -32,9 +32,11 @@ const products = [
     key: 4
   }
 ]
+const productsRef = null
 const shoppingCart = null
 
 export default {
   products,
-  shoppingCart
+  shoppingCart,
+  productsRef
 }
