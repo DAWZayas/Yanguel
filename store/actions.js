@@ -49,11 +49,15 @@ export default {
   },
   buyShoppingCart ({commit, state}) {
     if (state.shoppingCart) {
+      let updates = {}
+      let newStock
       state.shoppingCart.forEach(product => {
         if (product.cuantity) {
-          commit('setProductStock', product)
+          newStock = parseInt(product.stock) - parseInt(product.cuantity)
+          updates['/products/' + product.key + '/stock'] = newStock
         }
       })
+      firebaseApp.database().ref().update(updates)
     }
     commit('removeShoppingCart')
   },
@@ -66,11 +70,26 @@ export default {
     updates['/products/' + newProductKey] = product
     return firebaseApp.database().ref().update(updates)
   },
+  modifyProduct ({commit, state}, product) {
+    if (!product) {
+      return
+    }
+    let updates = {}
+    updates['/products/' + product.key] = product
+    return firebaseApp.database().ref().update(updates)
+  },
   bindProducts: firebaseAction(({commit, dispatch}) => {
     let db = firebaseApp.database()
     let productsRef = db.ref('/products')
     dispatch('bindFirebaseReference', {reference: productsRef, toBind: 'products'}).then(() => {
       commit('setProductsRef', productsRef)
+    })
+  }),
+  bindProduct: firebaseAction(({commit, dispatch}, product) => {
+    let db = firebaseApp.database()
+    let productRef = db.ref('/products/' + product.key)
+    dispatch('bindFirebaseReference', {reference: productRef, toBind: 'product'}).then(() => {
+      commit('setProductRef', productRef)
     })
   }),
   bindFirebaseReference: firebaseAction(({bindFirebaseRef, state}, {reference, toBind}) => {
@@ -86,6 +105,14 @@ export default {
   /**
    * Undbinds firebase references
    */
+  unbindProductReference: firebaseAction(({unbindFirebaseRef, commit}) => {
+    commit('setProductRef', null)
+    try {
+      unbindFirebaseRef('product')
+    } catch (error) {
+      return
+    }
+  }),
   unbindFirebaseReferences: firebaseAction(({unbindFirebaseRef, commit}) => {
     commit('setConfigRef', null)
     commit('setStatisticsRef', null)

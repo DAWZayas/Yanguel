@@ -8,7 +8,7 @@
         <el-col :xs="24" :md="12" :lg ="8" v-for="product in products" :key="product.key" class = "marginTop">
           <product :product="product"  @addToCart="addToCart" @removeFromCart = "removeFromCart"></product>
         </el-col>
-        <button-add-component></button-add-component>
+        <button-add-component v-if="admin"></button-add-component>
       </el-row>
     </el-main>
     <el-footer>
@@ -24,6 +24,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
+      admin: true
     }
   },
   components: {
