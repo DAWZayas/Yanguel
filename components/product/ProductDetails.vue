@@ -86,7 +86,7 @@
     },
     props: ['product'],
     methods: {
-      ...mapActions(['modifyProduct', 'bindProduct', 'unbindProductReference']),
+      ...mapActions(['modifyProduct', 'removeProduct', 'bindProduct', 'unbindProductReference']),
       reset () {
         this.form.name = this.product.name
         this.form.description = ''
@@ -114,17 +114,25 @@
         this.asignValues()
         this.modifyProduct(this.editProduct)
         this.reset()
-        this.onSuccess()
+        this.onSuccessEdit()
         this.dialogFormVisible = false
       },
       onRemove (ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        this.$emit('removeFromCart', this.shoppingCartProduct)
+        this.removeProduct(this.product)
+        this.onSuccessDelete()
       },
-      onSuccess () {
+      onSuccessEdit () {
         this.$message({
           message: 'Product edited correctly.',
+          type: 'success',
+          center: true
+        })
+      },
+      onSuccessDelete () {
+        this.$message({
+          message: 'Product removed correctly.',
           type: 'success',
           center: true
         })

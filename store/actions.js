@@ -84,6 +84,13 @@ export default {
     console.log(reference)
     return firebaseApp.database().ref(reference).update(updateProduct)
   },
+  removeProduct ({commit, state}, product) {
+    if (!product) {
+      return
+    }
+    const reference = '/products/' + product['.key']
+    return firebaseApp.database().ref(reference).remove()
+  },
   bindProducts: firebaseAction(({commit, dispatch}) => {
     let db = firebaseApp.database()
     let productsRef = db.ref('/products')
