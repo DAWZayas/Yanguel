@@ -28,6 +28,8 @@ export default {
   },
   setProductRef (state, value) {
     state.productRef = value
+  },
+  setAuthError (state, value) {
+    state.authError = value
   }
-
 }

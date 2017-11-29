@@ -2,7 +2,7 @@
   <div>
     <header-component></header-component>
     <el-row>
-      <el-col :xs="24" :md="15" class="fill">
+      <el-col :xs="24" :md="12" class="fill">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" style="padding-top: 8em;">
           <el-menu-item index="1">Login</el-menu-item>
           <el-menu-item index="2">Register</el-menu-item>
@@ -67,15 +67,9 @@ export default {
     padding-left: 0
   }
 
-  @media (min-width: 580px) {
-    .fill{
-      padding-left: 25vh
-    }
-  }
-
   @media (min-width: 1000px) {
     .fill{
-      padding-left: 50vh
+      padding-left: 30vw
     }
   }
 

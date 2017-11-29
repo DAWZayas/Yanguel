@@ -91,6 +91,20 @@ export default {
     const reference = '/products/' + product['.key']
     return firebaseApp.database().ref(reference).remove()
   },
+  authenticate ({state, commit}, {email, password}) {
+    firebaseApp.auth().signInWithEmailAndPassword(email, password).then(() => {
+      commit('setAuthError', '')
+    }).catch(err => {
+      commit('setAuthError', err.message)
+    })
+  },
+  createUser ({state, commit}, {email, password}) {
+    firebaseApp.auth().createUserWithEmailAndPassword(email, password).then(() => {
+      commit('setAuthError', '')
+    }).catch(err => {
+      commit('setAuthError', err.message)
+    })
+  },
   bindProducts: firebaseAction(({commit, dispatch}) => {
     let db = firebaseApp.database()
     let productsRef = db.ref('/products')
