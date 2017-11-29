@@ -8,7 +8,7 @@
         <el-input type="password" v-model="ruleForm2.password2" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="loginForm('ruleForm2')">Login</el-button>
+        <el-button type="primary" @click="loginForm">Login</el-button>
       </el-form-item>
     </el-form>
   </div>
