@@ -4,7 +4,7 @@
       <header-component></header-component>
     </el-header>
     <el-main>
-      <productDetails :product="this.product"></productDetails>
+       <product-details :product = "this.product"></product-details>
     </el-main>
     <el-footer>
       <footer-component></footer-component>
@@ -33,6 +33,7 @@ export default {
       this.products.forEach(p => {
         if (p['.key'] === this.$route.params.id) {
           this.product = p
+          console.log(this.product)
         }
       })
     }
@@ -45,10 +46,22 @@ export default {
   created () {
     this.bindProducts()
     this.getProduct()
-    this.bindProduct(this.product)
   }
 
 }
 </script>
 <style lang="scss">
+  @import "../../assets/styles/base/colors";
+  @import "../../assets/styles/base/variables";
+  @import "../../assets/styles/vendors/flex";
+  @import "../../assets/styles/vendors/bootstrap/functions";
+  @import "../../assets/styles/vendors/bootstrap/variables";
+  @import "../../assets/styles/vendors/bootstrap/mixins";
+
+  .img{
+    width: 100%;
+  }
+  .marginRight{
+    margin-right: 2em;
+  }
 </style>
