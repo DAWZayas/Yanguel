@@ -1,8 +1,6 @@
 <template>
   <el-container>
-    <el-header>
-      <header-component></header-component>
-    </el-header>
+    <header-component></header-component>
     <el-main>
        <product-details :product = "this.product"></product-details>
     </el-main>

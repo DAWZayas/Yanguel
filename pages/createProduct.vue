@@ -1,8 +1,6 @@
 <template>
   <el-container>
-    <el-header>
-      <header-component></header-component>
-    </el-header>
+    <header-component></header-component>
     <el-main>
       <el-row :gutter="20">
         <el-col class = "marginTop" :xs="24">
