@@ -72,6 +72,7 @@ export default {
       ev.stopPropagation()
       let method = this.createUser
       method({email: this.ruleForm.user, password: this.ruleForm.password})
+      this.$router.push('/profile')
     }
   }
 }

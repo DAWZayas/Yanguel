@@ -14,8 +14,8 @@
             <p class="text transparent"> {{product.stock > 0 ? "En stock: " + product.stock + " unidades." : "Producto Agotado."}}</p>
           </el-col>
           <el-col :xs="10" :md="14">
-            <p v-if="product.offer" class="text"><span class = "title"> Oferta: </span>{{product.offer}}€</p>
-            <p class="text">Precio: {{product.price}}€</p>
+            <p class="text"><span class = "title"  v-if="product.offer"> Oferta: {{product.offer}}€ / </span>
+            <span>Precio: {{product.price}}€</span></p>
           </el-col>
         </el-row>
         <el-row>
@@ -163,6 +163,7 @@ export default {
 }
 
 .image {
+  height: 400px;
   margin-top: 0.3em;
   width: 100%;
 }

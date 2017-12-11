@@ -1,8 +1,6 @@
 <template>
   <el-container>
-    <el-header>
-      <header-component></header-component>
-    </el-header>
+    <header-component></header-component>
     <el-main>
       <el-row>
         <el-button class = "marginTop" v-if="shoppingCart" @click='buyShoppingCart'> Comprar carrito</el-button>

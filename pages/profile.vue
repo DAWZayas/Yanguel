@@ -63,7 +63,6 @@ export default {
 }
 
 .gridRows{
-  padding-top: 8em;
   display: grid;
 }
 

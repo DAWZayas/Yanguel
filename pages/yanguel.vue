@@ -1,8 +1,6 @@
 <template>
   <el-container>
-    <el-header>
-      <header-component></header-component>
-    </el-header>
+    <header-component></header-component>
     <el-main>
       <el-row :gutter="20">
         <el-col :xs="24" :md="12" :lg ="8" v-for="product in products" :key="product.key" class = "marginTop">
