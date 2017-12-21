@@ -5,7 +5,7 @@
     mode="horizontal"
     background-color="#545c64"
     text-color="#fff">
-    <el-menu-item index="1"><nuxt-link class="nav-link" to="/">Home</nuxt-link></el-menu-item>
+    <el-menu-item index="1"><nuxt-link class="nav-link" to="/"><i class="material-icons">home</i></nuxt-link></el-menu-item>
     <el-menu-item index="2"><nuxt-link class="nav-link" to="/cart"><i class="material-icons">shopping_cart</i></nuxt-link></el-menu-item>
     <el-menu-item index="3"><nuxt-link class="nav-link" to="/login"><i class="material-icons">account_box</i></nuxt-link></el-menu-item>
   </el-menu>
