@@ -1,13 +1,25 @@
 
 import firebaseApp from '~/firebaseapp'
 import {firebaseAction} from 'vuexfire'
+import {uuidv1} from 'uuid/v1'
+
+function _uploadImage (file) {
+  let ref = firebaseApp.storage().ref().child('products')
+  return ref.child(uuidv1()).child(file.name).put(file).then(snapshot => {
+    return snapshot.downloadURL
+  })
+}
 
 export default {
+  _uploadImage,
   /**
    * adds product to the shopping cart
    * @param {object} store
    * @param {object} product
    */
+  uploadImages ({state}, files) {
+    return Promise.all(files.map(_uploadImage))
+  },
   addToCart ({commit, state}, product) {
     if (!product) {
       return

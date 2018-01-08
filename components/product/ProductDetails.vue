@@ -26,6 +26,21 @@
               <el-form-item label="Product name">
                 <el-input v-model="form.name" auto-complete="off"></el-input>
               </el-form-item>
+              <el-form-item label = 'Tags'>
+                <el-select
+                  v-model="selectValue"
+                  multiple
+                  filterable
+                  allow-create
+                  placeholder="Choose tags for your article">
+                  <el-option
+                    v-for="item in optionSelect"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
               <el-form-item label="Stock">
                 <el-input-number size = "small" controls-position = "right" v-model="form.stock" placeholder="Please set the stock"></el-input-number>
               </el-form-item>
@@ -73,9 +88,20 @@
           price: this.product.price,
           offer: this.product.offer,
           src: '',
+          tags: [],
           description: '',
           stock: this.product.stock
         },
+        optionSelect: [{
+          value: 'Electronica',
+          label: 'Electronica'
+        }, {
+          value: 'Informatica',
+          label: 'Informatica'
+        }, {
+          value: 'Otros',
+          label: 'Otros'
+        }],
         editProduct: {
           '.key': this.product['.key']
         }
@@ -86,11 +112,12 @@
     },
     props: ['product'],
     methods: {
-      ...mapActions(['modifyProduct', 'removeProduct', 'bindProduct', 'unbindProductReference']),
+      ...mapActions(['modifyProduct', 'removeProduct', 'bindProduct', 'unbindProductReference', 'uploadImages']),
       reset () {
         this.form.name = this.product.name
         this.form.description = ''
         this.form.src = ''
+        this.form.tags = []
         this.form.price = this.product.price
         this.form.offer = this.product.offer
         this.form.stock = this.product.stock
@@ -104,6 +131,7 @@
         this.form.name !== '' ? this.editProduct.name = this.form.name : this.editProduct.name = this.product.name
         this.form.price > 0 ? this.editProduct.price = this.form.price : this.editProduct.price = this.product.price
         this.form.offer > this.form.price ? this.editProduct.offer = this.form.offer : this.editProduct.offer = 0
+        this.form.tags !== [] ? this.editProduct.tags = this.form.tags : this.editProduct.tags = []
         this.form.src !== '' ? this.editProduct.src = this.form.src : this.editProduct.src = this.product.src
         this.form.description !== '' ? this.editProduct.description = this.form.description : this.editProduct.description = this.product.description
         this.form.stock > 0 ? this.editProduct.stock = this.form.stock : this.editProduct.stock = this.product.stock
