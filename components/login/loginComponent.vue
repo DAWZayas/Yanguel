@@ -10,6 +10,9 @@
       <el-form-item>
         <el-button type="primary" @click="loginForm">Login</el-button>
       </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="loginFacebook">Login with Google</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -38,12 +41,17 @@ export default {
   },
 
   methods: {
-    ...mapActions(['authenticate']),
+    ...mapActions(['authenticate', 'authenticateWithGoogle']),
     loginForm (ev) {
       ev.preventDefault()
       ev.stopPropagation()
       this.authenticate({email: this.ruleForm2.user2, password: this.ruleForm2.password2})
       this.$router.push('/profile')
+    },
+    loginFacebook (ev) {
+      ev.preventDefault()
+      ev.stopPropagation()
+      this.authenticateWithGoogle()
     }
   }
 }
