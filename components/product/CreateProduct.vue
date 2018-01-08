@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="form" :model="form" label-width="120px">
+  <el-form label-width="120px">
     <el-form-item label="Product">
       <el-input v-model="name"></el-input>
     </el-form-item>
@@ -78,7 +78,7 @@
         this.price = ''
         this.offer = ''
         this.stock = ''
-        this.pictures = []
+        this.$refs.imageFile.value = null
       },
       filesChange (files) {
         this.pictures = [...files]
@@ -96,7 +96,6 @@
           this.addProduct({
             name: this.name,
             description: this.description,
-            src: this.url,
             price: this.price,
             tags: this.tags,
             offer: this.offer,

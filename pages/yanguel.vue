@@ -41,7 +41,6 @@ export default {
       shoppingCart: 'getShoppingCart'
     }),
     productsToDisplay () {
-      console.log(this.products)
       return this.products.filter(product => {
         let name = product.name.toLowerCase()
         let description = product.description.toLowerCase()

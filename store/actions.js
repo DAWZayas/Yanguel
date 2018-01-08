@@ -1,9 +1,10 @@
 
 import firebaseApp from '~/firebaseapp'
 import {firebaseAction} from 'vuexfire'
-import {uuidv1} from 'uuid/v1'
+import uuidv1 from 'uuid/v1'
 
 function _uploadImage (file) {
+  console.log('File ----->', file)
   let ref = firebaseApp.storage().ref().child('products')
   return ref.child(uuidv1()).child(file.name).put(file).then(snapshot => {
     return snapshot.downloadURL
@@ -12,14 +13,14 @@ function _uploadImage (file) {
 
 export default {
   _uploadImage,
+  uploadImages ({state}, files) {
+    return Promise.all(files.map(_uploadImage))
+  },
   /**
    * adds product to the shopping cart
    * @param {object} store
    * @param {object} product
    */
-  uploadImages ({state}, files) {
-    return Promise.all(files.map(_uploadImage))
-  },
   addToCart ({commit, state}, product) {
     if (!product) {
       return
@@ -86,7 +87,7 @@ export default {
     }
     const updateProduct = {
       name: product.name,
-      src: product.src,
+      pictures: product.pictures,
       stock: product.stock,
       offer: product.offer,
       description: product.description,
