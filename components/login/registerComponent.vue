@@ -34,6 +34,14 @@ export default {
       }
     }
 
+    var validateEmail = (rule, value, callback) => {
+      if (/^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/.test(value)) {
+        callback()
+      } else {
+        callback(new Error('Debe introducir un email valido'))
+      }
+    }
+
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Debe introducir la misma contraseña'))
@@ -52,8 +60,7 @@ export default {
       },
       rules: {
         user: [
-          { required: true, message: 'Debe introducir un nombre', trigger: 'blur' },
-          { min: 4, message: 'El usuario debe tener minimo 4 digitos', trigger: 'blur' }
+          { validator: validateEmail, trigger: 'blur' }
         ],
         password: [
           { validator: validatePass, trigger: 'blur' }
