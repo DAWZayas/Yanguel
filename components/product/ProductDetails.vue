@@ -4,7 +4,7 @@
         <p class="text title">{{product.name}}</p>
       </el-row>
       <el-col :xs="24" :md="4">
-        <img :src="product.src" class="img">
+        <img :src="product.pictures[0]" class="img">
       </el-col>
       <el-col :xs="24" :md="20">
         <el-row>
@@ -26,6 +26,21 @@
               <el-form-item label="Product name">
                 <el-input v-model="form.name" auto-complete="off"></el-input>
               </el-form-item>
+              <el-form-item label = 'Tags'>
+                <el-select
+                  v-model="form.tags"
+                  multiple
+                  filterable
+                  allow-create
+                  placeholder="Choose tags for your article">
+                  <el-option
+                    v-for="item in optionSelect"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
               <el-form-item label="Stock">
                 <el-input-number size = "small" controls-position = "right" v-model="form.stock" placeholder="Please set the stock"></el-input-number>
               </el-form-item>
@@ -36,7 +51,7 @@
                 <el-input-number size = "small" controls-position = "right" v-model="form.offer" placeholder="Please select the offer"></el-input-number>
               </el-form-item>
               <el-form-item label="Image">
-                <el-input v-model="form.src" placeholder="Please select a img"></el-input>
+                <el-input v-model="form.pictures" placeholder="Please select a img"></el-input>
               </el-form-item>
               <el-form-item label="Description">
                 <el-input v-model="form.description" placeholder="Please set the product description"></el-input>
@@ -73,12 +88,25 @@
           price: this.product.price,
           offer: this.product.offer,
           src: '',
+          tags: [],
           description: '',
           stock: this.product.stock
         },
+        optionSelect: [{
+          value: 'Electronica',
+          label: 'Electronica'
+        }, {
+          value: 'Informatica',
+          label: 'Informatica'
+        }, {
+          value: 'Otros',
+          label: 'Otros'
+        }],
+        tags: [],
         editProduct: {
           '.key': this.product['.key']
         }
+
       }
     },
     name: 'productDetails',
@@ -86,11 +114,12 @@
     },
     props: ['product'],
     methods: {
-      ...mapActions(['modifyProduct', 'removeProduct', 'bindProduct', 'unbindProductReference']),
+      ...mapActions(['modifyProduct', 'removeProduct', 'bindProduct', 'unbindProductReference', 'uploadImages']),
       reset () {
         this.form.name = this.product.name
         this.form.description = ''
-        this.form.src = ''
+        this.form.pictures = ''
+        this.form.tags = []
         this.form.price = this.product.price
         this.form.offer = this.product.offer
         this.form.stock = this.product.stock
@@ -104,7 +133,7 @@
         this.form.name !== '' ? this.editProduct.name = this.form.name : this.editProduct.name = this.product.name
         this.form.price > 0 ? this.editProduct.price = this.form.price : this.editProduct.price = this.product.price
         this.form.offer > this.form.price ? this.editProduct.offer = this.form.offer : this.editProduct.offer = 0
-        this.form.src !== '' ? this.editProduct.src = this.form.src : this.editProduct.src = this.product.src
+        this.form.tags !== [] ? this.editProduct.tags = this.form.tags : this.editProduct.tags = []
         this.form.description !== '' ? this.editProduct.description = this.form.description : this.editProduct.description = this.product.description
         this.form.stock > 0 ? this.editProduct.stock = this.form.stock : this.editProduct.stock = this.product.stock
       },

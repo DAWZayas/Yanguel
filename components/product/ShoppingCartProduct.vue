@@ -2,7 +2,7 @@
   <el-card :body-style="{ padding: '0px' }">
     <el-row>
       <el-col :xs="8" :md="4">
-        <img :src="product.src" class="img">
+        <img :src="product.pictures[0]" class="img">
       </el-col>
       <el-col :xs="16" :md="20">
         <el-row>
@@ -19,7 +19,7 @@
         </el-row>
         <el-row>
             <el-input-number size="mini" controls-position="right" type="number" v-model ="cuantity" :disabled="product.stock <= 0" :min = '0' :max = "product.stock" placeholder="cantidad" aria-describedby="basic-addon1"></el-input-number>
-            <el-button size="mini"type = "primary" icon = "el-icon-sold-out" @click="onValueChange" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"></el-button>
+            <el-button size="mini" type= "primary" icon = "el-icon-sold-out" @click="onValueChange" :class="{disabled: product.stock <= 0}" :disabled="product.stock <= 0"></el-button>
         </el-row>
         <el-row>
           <el-button type="text" @click="onRemove">Eliminar</el-button>

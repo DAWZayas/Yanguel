@@ -3,7 +3,7 @@
       <el-row>
         <el-row>
           <el-col>
-            <nuxt-link :to="'/products/' + product['.key']" ><img :src="product.src" class="image" type="text" @click="outerVisible = true"></nuxt-link>
+            <nuxt-link :to="'/products/' + product['.key']" ><img :src="product.pictures[0]" class="image" type="text" @click="outerVisible = true"></nuxt-link>
           </el-col>
         </el-row>
         <el-row>
@@ -55,7 +55,7 @@ export default {
         price: this.product.price,
         description: this.product.description,
         offer: this.product.offer ? this.product.offer : null,
-        src: this.product.src
+        pictures: this.product.pictures
       }
 
     }
