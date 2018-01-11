@@ -2,7 +2,7 @@
   <el-container>
     <header-component></header-component>
     <el-main>
-       <product-details :product = "this.product"></product-details>
+       <product-details :product = "getProduct()"></product-details>
     </el-main>
     <el-footer>
       <footer-component></footer-component>
@@ -17,7 +17,6 @@ import { ProductDetails } from '~/components/product'
 export default {
   data () {
     return {
-      product: null
     }
   },
   components: {
@@ -28,12 +27,9 @@ export default {
   methods: {
     ...mapActions(['bindProducts', 'bindProduct', 'unbindProductReference']),
     getProduct () {
-      this.products.forEach(p => {
-        if (p['.key'] === this.$route.params.id) {
-          this.product = p
-          console.log(this.product)
-        }
-      })
+      const product = this.products.filter(p => p['.key'] === this.$route.params.id)[0]
+      console.log('Producto --->', product)
+      return product
     }
   },
   computed: {
@@ -42,8 +38,7 @@ export default {
     })
   },
   created () {
-    this.bindProducts()
-    this.getProduct()
+    this.bindProducts().then(() => this.bindProduct(this.getProduct()))
   }
 
 }

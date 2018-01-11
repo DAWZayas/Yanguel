@@ -31,5 +31,8 @@ export default {
   },
   setAuthError (state, value) {
     state.authError = value
+  },
+  setLoading (state, loading) {
+    state.loading = {...state.loading, ...loading}
   }
 }

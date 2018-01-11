@@ -4,7 +4,8 @@
     <el-main>
       <el-row :gutter="20">
         <el-col class = "marginTop" :xs="24">
-          <createProduct  @addProduct="addProduct"></createProduct>
+          <clip-loader v-show="loading.creatingProduct"></clip-loader>
+          <createProduct  v-show = "!loading.creatingProduct" @addProduct="addProduct"></createProduct>
         </el-col>
       </el-row>
     </el-main>
@@ -16,7 +17,8 @@
 <script>
 import { HeaderComponent, FooterComponent } from '~/components/common'
 import { CreateProduct } from '~/components/product'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 export default {
   data () {
@@ -26,13 +28,15 @@ export default {
   components: {
     FooterComponent,
     HeaderComponent,
-    CreateProduct
+    CreateProduct,
+    ClipLoader
   },
   computed: {
     ...mapGetters({
       products: 'getProducts',
       shoppingCart: 'getShoppingCart'
-    })
+    }),
+    ...mapState(['loading'])
   },
   methods: {
     ...mapActions(['addProduct'])

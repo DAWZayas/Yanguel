@@ -1,12 +1,13 @@
 <template>
-  <el-container>
+  <el-container >
     <header-component></header-component>
     <el-main>
       <div class="form-group">
  +      <input v-model="searchTerm" class="input" type="search" placeholder="Search for products">
  +    </div>
-      <el-row :gutter="20">
-        <el-col :xs="24" :md="12" :lg ="8" v-for="product in productsToDisplay" :key="product.key" class = "marginTop">
+      <clip-loader v-show="loading.loadingProducts"></clip-loader>
+      <el-row :gutter="20" v-show="!loading.loadingProducts">
+        <el-col :xs="24" :md="12" :lg ="8" v-for="(product, key) in productsToDisplay" :key="key" class = "marginTop">
           <product :product="product"  @addToCart="addToCart" @removeFromCart = "removeFromCart"></product>
         </el-col>
         <button-add-component v-if="admin"></button-add-component>
@@ -20,7 +21,8 @@
 <script>
 import { HeaderComponent, FooterComponent } from '~/components/common'
 import { Product, buttonAddComponent } from '~/components/product'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 export default {
   data () {
@@ -30,6 +32,7 @@ export default {
     }
   },
   components: {
+    ClipLoader,
     FooterComponent,
     HeaderComponent,
     Product,
@@ -40,17 +43,21 @@ export default {
       products: 'getProducts',
       shoppingCart: 'getShoppingCart'
     }),
+    ...mapState(['loading']),
     productsToDisplay () {
-      return this.products.filter(product => {
+      this.setLoading({loadingProducts: true})
+      const products = this.products.filter(product => {
         let name = product.name.toLowerCase()
         let description = product.description.toLowerCase()
         let term = this.searchTerm.toLowerCase()
         return name.indexOf(term) >= 0 || description.indexOf(term) >= 0
-      })
+      }).reverse()
+      this.setLoading({loadingProducts: false})
+      return products
     }
   },
   methods: {
-    ...mapActions(['addToCart', 'removeFromCart'])
+    ...mapActions(['addToCart', 'removeFromCart', 'setLoading'])
   }
 }
 </script>
