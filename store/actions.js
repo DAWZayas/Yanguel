@@ -1,4 +1,5 @@
 
+import firebase from 'firebase'
 import firebaseApp from '~/firebaseapp'
 import {firebaseAction} from 'vuexfire'
 import uuidv1 from 'uuid/v1'
@@ -110,6 +111,14 @@ export default {
   },
   authenticate ({state, commit}, {email, password}) {
     firebaseApp.auth().signInWithEmailAndPassword(email, password).then(() => {
+      commit('setAuthError', '')
+    }).catch(err => {
+      commit('setAuthError', err.message)
+    })
+  },
+  authenticateWithGoogle ({state, commit}) {
+    firebaseApp.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+    firebaseApp.auth().getRedirectResult().then(() => {
       commit('setAuthError', '')
     }).catch(err => {
       commit('setAuthError', err.message)
