@@ -84,7 +84,7 @@
 </template>
 
 <script>
-  import {mapActions, mapState, mapGetters} from 'vuex'
+  import {mapActions, mapState} from 'vuex'
   import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
   export default {
@@ -95,14 +95,14 @@
         editing: false,
         dialogFormVisible: false,
         form: {
-          name: this.product.name,
-          price: this.product.price,
-          offer: this.product.offer,
+          name: '',
+          price: 0,
+          offer: 0,
           src: '',
           tags: [],
           description: '',
           pictures: [],
-          stock: this.product.stock
+          stock: 0
         },
         optionSelect: [{
           value: 'Electronica',
@@ -124,22 +124,18 @@
     components: {
       ClipLoader
     },
-    computed: {
-      ...mapGetters({
-        product: 'getProduct'
-      })
-    },
+    props: ['product'],
     methods: {
       ...mapActions(['modifyProduct', 'removeProduct', 'unbindProductReference', 'uploadImages', 'bindProduct']),
       ...mapState(['loading']),
       reset () {
-        this.form.name = this.product.name
+        this.form.name = ''
         this.form.description = ''
         this.form.pictures = ''
         this.form.tags = []
-        this.form.price = this.product.price
-        this.form.offer = this.product.offer
-        this.form.stock = this.product.stock
+        this.form.price = 0
+        this.form.offer = 0
+        this.form.stock = 0
         this.$refs.imageFile.value = null
       },
       onCancel (ev) {
@@ -213,10 +209,6 @@
     },
     created () {
       console.log(this.product)
-    },
-    unmount () {
-      this.unbindProductReference()
-      console.log(':D')
     }
   }
 </script>

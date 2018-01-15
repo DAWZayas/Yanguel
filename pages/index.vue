@@ -1,6 +1,6 @@
 <template>
   <div>
-    <yanguel v-show="!loadingProducts"> </yanguel>
+    <yanguel> </yanguel>
   </div>
 </template>
 <script>

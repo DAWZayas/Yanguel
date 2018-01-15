@@ -5,9 +5,8 @@
       <div class="form-group">
  +      <input v-model="searchTerm" class="input" type="search" placeholder="Search for products">
  +    </div>
-      <clip-loader v-show="loading.loadingProducts"></clip-loader>
-      <el-row :gutter="20" v-show="!loading.loadingProducts">
-        <el-col :xs="24" :md="12" :lg ="8" v-for="(product, key) in productsToDisplay" :key="key" class = "marginTop">
+      <el-row :gutter="20">
+        <el-col :xs="24" :md="12" :lg ="8" v-for="product in productsToDisplay" :key="product['.key']" class = "marginTop">
           <product :product="product"  @addToCart="addToCart" @removeFromCart = "removeFromCart"></product>
         </el-col>
         <button-add-component v-if="admin"></button-add-component>
@@ -50,7 +49,9 @@ export default {
         let name = product.name.toLowerCase()
         let description = product.description.toLowerCase()
         let term = this.searchTerm.toLowerCase()
-        return name.indexOf(term) >= 0 || description.indexOf(term) >= 0
+        let tags = product.tags.filter(t => t.toLowerCase().indexOf(term) >= 0)
+        console.log(tags)
+        return name.indexOf(term) >= 0 || description.indexOf(term) >= 0 || tags.length > 0
       }).reverse()
       this.setLoading({loadingProducts: false})
       return products
