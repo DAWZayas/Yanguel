@@ -32,10 +32,15 @@ export default {
   setAuthError (state, value) {
     state.authError = value
   },
+
+  setIsAuthenticated (state, value) {
+    state.isAuthenticated = value
+  },
   setLoading (state, loading) {
     state.loading = {...state.loading, ...loading}
   },
   showSearchBar (state) {
     state.showSearchBar = !state.showSearchBar
   }
+
 }
