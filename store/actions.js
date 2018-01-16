@@ -116,6 +116,7 @@ export default {
     firebaseApp.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
     firebaseApp.auth().getRedirectResult().then(() => {
       commit('setAuthError', '')
+      commit('setIsAuthenticated', 'true')
     }).catch(err => {
       commit('setAuthError', err.message)
     })
@@ -123,6 +124,7 @@ export default {
   createUser ({state, commit}, {email, password}) {
     firebaseApp.auth().createUserWithEmailAndPassword(email, password).then(() => {
       commit('setAuthError', '')
+      commit('setIsAuthenticated', 'true')
     }).catch(err => {
       commit('setAuthError', err.message)
     })
