@@ -34,5 +34,8 @@ export default {
   },
   setLoading (state, loading) {
     state.loading = {...state.loading, ...loading}
+  },
+  showSearchBar (state) {
+    state.showSearchBar = !state.showSearchBar
   }
 }
