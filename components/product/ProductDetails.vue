@@ -1,5 +1,7 @@
 <template>
-    <el-row>
+  <div>
+    <clip-loader v-show="loading.editProduct"></clip-loader>
+    <el-row v-show = "!loading.ed">
       <el-row>
         <p class="text title">{{product.name}}</p>
       </el-row>
@@ -21,7 +23,9 @@
           <el-col :xs="14"><p> {{product.description}} </p></el-col>
         </el-row>
         <el-row>
-          <el-dialog title="Product Editing" :visible.sync="dialogFormVisible">
+          <el-dialog title="Product Editing"
+                     :visible.sync="dialogFormVisible"
+          >
             <el-form :model="form">
               <el-form-item label="Product name">
                 <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -51,7 +55,10 @@
                 <el-input-number size = "small" controls-position = "right" v-model="form.offer" placeholder="Please select the offer"></el-input-number>
               </el-form-item>
               <el-form-item label="Image">
-                <el-input v-model="form.pictures" placeholder="Please select a img"></el-input>
+                <div class="image-upload">
+                  <label class="title" for="imageFile">Add an image</label>
+                  <input @change="filesChange($event.target.files)" type="file" multiple class="form-control-file" ref="imageFile">
+                </div>
               </el-form-item>
               <el-form-item label="Description">
                 <el-input v-model="form.description" placeholder="Please set the product description"></el-input>
@@ -73,24 +80,29 @@
         </el-row>
       </el-col>
     </el-row>
+  </div>
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
+  import {mapActions, mapState} from 'vuex'
+  import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
+
   export default {
     data () {
       return {
         cuantity: 0,
         admin: true,
+        editing: false,
         dialogFormVisible: false,
         form: {
-          name: this.product.name,
-          price: this.product.price,
-          offer: this.product.offer,
+          name: '',
+          price: 0,
+          offer: 0,
           src: '',
           tags: [],
           description: '',
-          stock: this.product.stock
+          pictures: [],
+          stock: 0
         },
         optionSelect: [{
           value: 'Electronica',
@@ -102,7 +114,6 @@
           value: 'Otros',
           label: 'Otros'
         }],
-        tags: [],
         editProduct: {
           '.key': this.product['.key']
         }
@@ -111,29 +122,35 @@
     },
     name: 'productDetails',
     components: {
+      ClipLoader
     },
     props: ['product'],
     methods: {
-      ...mapActions(['modifyProduct', 'removeProduct', 'bindProduct', 'unbindProductReference', 'uploadImages']),
+      ...mapActions(['modifyProduct', 'removeProduct', 'unbindProductReference', 'uploadImages', 'bindProduct']),
+      ...mapState(['loading']),
       reset () {
-        this.form.name = this.product.name
+        this.form.name = ''
         this.form.description = ''
         this.form.pictures = ''
         this.form.tags = []
-        this.form.price = this.product.price
-        this.form.offer = this.product.offer
-        this.form.stock = this.product.stock
+        this.form.price = 0
+        this.form.offer = 0
+        this.form.stock = 0
+        this.$refs.imageFile.value = null
       },
       onCancel (ev) {
         ev.preventDefault()
         ev.stopPropagation()
         this.reset()
       },
+      filesChange (files) {
+        this.form.pictures = [...files]
+      },
       asignValues () {
         this.form.name !== '' ? this.editProduct.name = this.form.name : this.editProduct.name = this.product.name
         this.form.price > 0 ? this.editProduct.price = this.form.price : this.editProduct.price = this.product.price
         this.form.offer > this.form.price ? this.editProduct.offer = this.form.offer : this.editProduct.offer = 0
-        this.form.tags !== [] ? this.editProduct.tags = this.form.tags : this.editProduct.tags = []
+        this.form.tags !== [] ? this.editProduct.tags = this.form.tags : this.editProduct.tags = this.product.tags
         this.form.description !== '' ? this.editProduct.description = this.form.description : this.editProduct.description = this.product.description
         this.form.stock > 0 ? this.editProduct.stock = this.form.stock : this.editProduct.stock = this.product.stock
       },
@@ -141,38 +158,57 @@
         ev.preventDefault()
         ev.stopPropagation()
         this.asignValues()
-        this.modifyProduct(this.editProduct)
-        this.reset()
-        this.onSuccessEdit()
-        this.dialogFormVisible = false
+        this.editing = true
+        this.uploadImages(this.form.pictures).then(urlPics => {
+          this.editProduct.pictures = this.form.pictures.length !== 0 ? urlPics : this.product.pictures
+          this.modifyProduct(this.editProduct)
+          console.log(this.editProduct)
+        }).then(() => {
+          this.editing = false
+          this.onSuccessEdit()
+          this.dialogFormVisible = false
+          this.reset()
+        }).catch(err => {
+          this.editing = false
+          this.onError(err)
+          this.dialogFormVisible = false
+          this.reset()
+        })
       },
       onRemove (ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        this.removeProduct(this.product)
-        this.onSuccessDelete()
+        this.removeProduct(this.product).then(() => {
+          this.onSuccessDelete()
+          this.$router.push('/')
+        }).catch((err) => {
+          this.onError(err)
+        })
       },
       onSuccessEdit () {
-        this.$message({
+        this.$notify.success({
+          title: 'Success',
           message: 'Product edited correctly.',
-          type: 'success',
-          center: true
+          position: 'bottom-right'
         })
       },
       onSuccessDelete () {
-        this.$message({
+        this.$notify.success({
+          title: 'Success',
           message: 'Product removed correctly.',
-          type: 'success',
-          center: true
+          position: 'bottom-right'
+        })
+      },
+      onError (err) {
+        this.$notify.error({
+          title: 'Oops! Something went wrong!',
+          message: err,
+          position: 'bottom-right'
         })
       }
     },
     created () {
-      this.bindProduct(this.product)
-    },
-    unmount () {
-      this.unbindProductReference()
-      console.log(':D')
+      console.log(this.product)
     }
   }
 </script>

@@ -71,7 +71,10 @@ export default {
           updates['/products/' + product.key + '/stock'] = newStock
         }
       })
-      firebaseApp.database().ref().update(updates)
+      commit('setLoading', {buyCart: true})
+      firebaseApp.database().ref().update(updates).then(() => {
+        commit('setLoading', {buyCart: false})
+      })
     }
     commit('removeShoppingCart')
   },
@@ -80,7 +83,9 @@ export default {
       return
     }
     let newProductKey = state.productsRef.push().key
-    return firebaseApp.database().ref('/products/' + newProductKey).update(product)
+    return firebaseApp.database().ref('/products/' + newProductKey).update(product).then(() => {
+      commit('setLoading', {creatingProduct: false})
+    })
   },
   modifyProduct ({commit, state}, product) {
     if (!product) {
@@ -95,7 +100,6 @@ export default {
       price: product.price
     }
     const reference = '/products/' + product['.key']
-    console.log(reference)
     return firebaseApp.database().ref(reference).update(updateProduct)
   },
   removeProduct ({commit, state}, product) {
@@ -139,6 +143,7 @@ export default {
   bindProduct: firebaseAction(({commit, dispatch}, product) => {
     let db = firebaseApp.database()
     let productRef = db.ref('/products/' + product['.key'])
+
     dispatch('bindFirebaseReference', {reference: productRef, toBind: 'product'}).then(() => {
       commit('setProductRef', productRef)
     })
@@ -175,5 +180,8 @@ export default {
     } catch (error) {
       return
     }
-  })
+  }),
+  setLoading ({commit}, loading) {
+    commit('setLoading', loading)
+  }
 }

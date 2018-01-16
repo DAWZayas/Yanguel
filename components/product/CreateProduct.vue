@@ -43,7 +43,9 @@
   </el-form>
 </template>
 <script>
-  import {mapActions} from 'vuex'
+  import {mapActions, mapState, mapGetters} from 'vuex'
+  import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
+
   export default {
     data () {
       return {
@@ -68,8 +70,17 @@
         tags: []
       }
     },
+    components: {
+      ClipLoader
+    },
+    computed: {
+      ...mapGetters({
+        products: 'getProducts'
+      })
+    },
     methods: {
-      ...mapActions(['addProduct', 'uploadImages']),
+      ...mapActions(['addProduct', 'uploadImages', 'setLoading', 'bindProducts']),
+      ...mapState(['loading']),
       reset () {
         this.name = ''
         this.description = ''
@@ -92,6 +103,7 @@
         this.isCreating = true
         ev.preventDefault()
         ev.stopPropagation()
+        this.setLoading({creatingProduct: true})
         this.uploadImages(this.pictures).then(urlPics =>
           this.addProduct({
             name: this.name,
@@ -105,15 +117,32 @@
             this.reset()
             this.isCreating = false
             this.onSuccess()
+          }).catch((err) => {
+            this.setLoading({creatingProduct: false})
+            this.reset()
+            this.isCreating = false
+            this.onError(err)
           })
         )
       },
       onSuccess () {
-        this.$message({
+        this.$notify.success({
+          title: 'Success',
           message: 'Product added correctly.',
-          type: 'success',
-          center: true
+          position: 'bottom-right'
         })
+      },
+      onError (err) {
+        this.$notify.error({
+          title: 'Something went wrong',
+          message: err,
+          position: 'bottom-right'
+        })
+      }
+    },
+    created () {
+      if (!this.productsRef) {
+        this.bindProducts()
       }
     }
   }
