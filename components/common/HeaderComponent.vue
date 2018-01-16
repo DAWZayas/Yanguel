@@ -1,14 +1,15 @@
 <template>
-  <el-menu
-    class="el-menu-demo menu"
-    mode="horizontal"
-    background-color="#545c64"
-    text-color="#fff">
-    <el-menu-item index="1"><nuxt-link to="/"><i class="material-icons">home</i></nuxt-link></el-menu-item>
-    <el-menu-item index="2"><nuxt-link to="/cart"><i class="material-icons">shopping_cart</i></nuxt-link></el-menu-item>
-    <el-menu-item index="3"><nuxt-link to="/login"><i class="material-icons">account_box</i></nuxt-link></el-menu-item>
-    <el-menu-item index="4"><nuxt-link to=""><i class="material-icons" @click="showSearchBar">search</i></nuxt-link></el-menu-item>
-  </el-menu>
+    <el-dropdown class="menu" size="default" trigger="click" placement="top-start" show-timeout="300" hide-timeout="200">
+        <span class="el-dropdown-link">
+          <i class="material-icons">menu</i>
+        </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item><nuxt-link to="/"><i class="material-icons">home</i></nuxt-link></el-dropdown-item>
+        <el-dropdown-item><nuxt-link to="/cart"><i class="material-icons">shopping_cart</i></nuxt-link></el-dropdown-item>
+        <el-dropdown-item><nuxt-link to="/login"><i class="material-icons">account_box</i></nuxt-link></el-dropdown-item>
+        <el-dropdown-item><i class="material-icons" @click="showSearchBar">search</i></el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
 </template>
 
 <script>
@@ -22,10 +23,7 @@
     components: {
     },
     methods: {
-      ...mapActions(['showSearchBar']),
-      onStartPage () {
-        this.$router.push('/')
-      }
+      ...mapActions(['showSearchBar'])
     }
   }
 </script>
@@ -39,5 +37,12 @@
 
   .menu{
     width: 100%;
+    background-color: #545c64;
+    text-color: #fff;
   }
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+
 </style>
