@@ -1,15 +1,18 @@
 <template>
-    <el-dropdown class="menu" size="default" trigger="click" placement="top-start" show-timeout="300" hide-timeout="200">
-        <span class="el-dropdown-link">
-          <i class="material-icons">menu</i>
-        </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item><nuxt-link to="/"><i class="material-icons">home</i></nuxt-link></el-dropdown-item>
-        <el-dropdown-item><nuxt-link to="/cart"><i class="material-icons">shopping_cart</i></nuxt-link></el-dropdown-item>
-        <el-dropdown-item><nuxt-link to="/login"><i class="material-icons">account_box</i></nuxt-link></el-dropdown-item>
-        <el-dropdown-item><i class="material-icons" @click="showSearchBar">search</i></el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+  <el-menu
+    class="el-menu-demo"
+    mode="horizontal"
+    background-color="#545c64"
+    text-color="#fff"
+    active-text-color="#ffd04b">
+    <el-submenu index="1">
+      <template slot="title"> <i class="material-icons">menu</i></template>
+      <el-menu-item index="1-1"><nuxt-link to="/"><i class="material-icons">home</i>Home</nuxt-link></el-menu-item>
+      <el-menu-item index="1-2"><nuxt-link to="/cart"><i class="material-icons">shopping_cart</i>Shopping Cart</nuxt-link></el-menu-item>
+      <el-menu-item index="1-3"><nuxt-link to="/login"><i class="material-icons">account_box</i>Profile</nuxt-link></el-menu-item>
+    </el-submenu>
+    <el-menu-item index="2"><i class="material-icons" @click="showSearchBar">search</i></el-menu-item>
+  </el-menu>
 </template>
 
 <script>
