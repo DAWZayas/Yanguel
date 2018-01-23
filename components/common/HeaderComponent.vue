@@ -1,30 +1,32 @@
 <template>
   <el-menu
-    :default-active="activeIndex"
-    class="el-menu-demo menu"
+    class="el-menu-demo"
     mode="horizontal"
     background-color="#545c64"
-    text-color="#fff">
-    <el-menu-item index="1"><nuxt-link class="nav-link" to="/"><i class="material-icons">home</i></nuxt-link></el-menu-item>
-    <el-menu-item index="2"><nuxt-link class="nav-link" to="/cart"><i class="material-icons">shopping_cart</i></nuxt-link></el-menu-item>
-    <el-menu-item index="3"><nuxt-link class="nav-link" to="/login"><i class="material-icons">account_box</i></nuxt-link></el-menu-item>
+    text-color="#fff"
+    active-text-color="#ffd04b">
+    <el-submenu index="1">
+      <template slot="title"> <i class="material-icons">menu</i></template>
+      <el-menu-item index="1-1"><nuxt-link to="/"><i class="material-icons">home</i>Home</nuxt-link></el-menu-item>
+      <el-menu-item index="1-2"><nuxt-link to="/cart"><i class="material-icons">shopping_cart</i>Shopping Cart</nuxt-link></el-menu-item>
+      <el-menu-item index="1-3"><nuxt-link to="/login"><i class="material-icons">account_box</i>Profile</nuxt-link></el-menu-item>
+    </el-submenu>
+    <el-menu-item index="2"><i class="material-icons" @click="showSearchBar">search</i></el-menu-item>
   </el-menu>
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
   export default {
     data () {
       return {
-        activeIndex: '1'
       }
     },
     name: 'header-component',
     components: {
     },
     methods: {
-      onStartPage () {
-        this.$router.push('/')
-      }
+      ...mapActions(['showSearchBar'])
     }
   }
 </script>
@@ -38,5 +40,12 @@
 
   .menu{
     width: 100%;
+    background-color: #545c64;
+    text-color: #fff;
   }
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+
 </style>

@@ -6,20 +6,24 @@
 <script>
   import yanguel from '~/pages/yanguel'
   import { mapActions, mapState } from 'vuex'
+
   export default {
     data () {
       return {
       }
     },
-    components: {yanguel},
+    components: {
+      yanguel
+    },
     methods: {
-      ...mapActions(['bindProducts'])
+      ...mapActions(['bindProducts', 'setLoading'])
     },
     computed: {
       ...mapState(['loading'])
     },
     created () {
-      this.bindProducts()
+      this.setLoading({loadingProducts: true})
+      this.bindProducts().then(() => this.setLoading({loadingProducts: false}))
     }
   }
 </script>

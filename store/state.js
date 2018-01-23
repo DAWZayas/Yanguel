@@ -6,6 +6,8 @@ const isAuthenticated = null
 const loading = {}
 const user = {}
 
+const showSearchBar = false
+
 export default {
   products: [],
   shoppingCart,
@@ -14,5 +16,6 @@ export default {
   productRef,
   isAuthenticated,
   loading,
-  user
+  user,
+  showSearchBar
 }

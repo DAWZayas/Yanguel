@@ -109,6 +109,9 @@ export default {
     const reference = '/products/' + product['.key']
     return firebaseApp.database().ref(reference).remove()
   },
+  showSearchBar ({commit}) {
+    commit('showSearchBar')
+  },
   authenticate ({state, commit}, {email, password}) {
     firebaseApp.auth().signInWithEmailAndPassword(email, password).then(() => {
       commit('setAuthError', '')
