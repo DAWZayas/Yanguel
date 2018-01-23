@@ -4,6 +4,7 @@ const product = {}
 const productRef = null
 const isAuthenticated = null
 const loading = {}
+const user = {}
 
 export default {
   products: [],
@@ -12,5 +13,6 @@ export default {
   product,
   productRef,
   isAuthenticated,
-  loading
+  loading,
+  user
 }

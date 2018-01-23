@@ -1,6 +1,12 @@
 <template>
   <div>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+      <el-form-item label="Nombre" prop="name">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+      <el-form-item label="Direccion" prop="address">
+        <el-input v-model="ruleForm.address"></el-input>
+      </el-form-item>
       <el-form-item label="Email" prop="user">
         <el-input v-model="ruleForm.user"></el-input>
       </el-form-item>
@@ -54,6 +60,8 @@ export default {
 
     return {
       ruleForm: {
+        name: '',
+        address: '',
         user: '',
         password: '',
         repeatPassword: ''
@@ -67,6 +75,13 @@ export default {
         ],
         repeatPassword: [
           { validator: validatePass2, trigger: 'blur' }
+        ],
+        name: [
+          { required: true, message: 'Debe introducir un nombre', trigger: 'blur' },
+          { min: 4, message: 'El nombre debe tener minimo 4 digitos', trigger: 'blur' }
+        ],
+        address: [
+          { required: true, message: 'Debe introducir una direccion', trigger: 'blur' }
         ]
       }
     }
@@ -78,7 +93,7 @@ export default {
       ev.preventDefault()
       ev.stopPropagation()
       let method = this.createUser
-      method({email: this.ruleForm.user, password: this.ruleForm.password})
+      method({email: this.ruleForm.user, password: this.ruleForm.password, name: this.ruleForm.name, address: this.ruleForm.address})
       this.$router.push('/profile')
     }
   }

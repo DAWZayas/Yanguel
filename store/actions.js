@@ -125,14 +125,21 @@ export default {
       commit('setAuthError', err.message)
     })
   },
-  createUser ({state, commit}, {email, password}) {
-    firebaseApp.auth().createUserWithEmailAndPassword(email, password).then(() => {
+  createUser ({state, commit, dispatch}, user) {
+    firebaseApp.auth().createUserWithEmailAndPassword(user.email, user.password).then(() => {
       commit('setAuthError', '')
       commit('setIsAuthenticated', 'true')
+    }).then(() => {
+      dispatch('saveUser', {name: user.name, address: user.address, email: user.email})
+    }).then(() => {
+      commit('saveUser', {name: user.name, address: user.address, email: user.email})
     }).catch(err => {
       commit('setAuthError', err.message)
     })
   },
+  saveUser: firebaseAction(() => {
+
+  }),
   bindProducts: firebaseAction(({commit, dispatch}) => {
     let db = firebaseApp.database()
     let productsRef = db.ref('/products')

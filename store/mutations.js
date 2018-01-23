@@ -32,9 +32,15 @@ export default {
   setAuthError (state, value) {
     state.authError = value
   },
-
   setIsAuthenticated (state, value) {
     state.isAuthenticated = value
+  },
+  saveUser (state, user) {
+    state.user = {
+      username: user.name,
+      email: user.email,
+      address: user.address
+    }
   },
   setLoading (state, loading) {
     state.loading = {...state.loading, ...loading}
