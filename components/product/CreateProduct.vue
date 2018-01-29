@@ -26,6 +26,13 @@
           <label class="title" for="imageFile">Add an image</label>
           <input @change="filesChange($event.target.files)" type="file" multiple class="form-control-file" ref="imageFile">
       </div>
+      <div
+        v-for="(src, index) in imagesSrc" :key="index"
+        class="img-preview col-6 col-md-2 p-0"
+        :class="(index === defaultImg) && !uploading ? 'defaultImg' : null"
+        :style="{ 'background-image': 'url(' + src + ')' }"
+        @click="defaultImg = index"
+      ></div>
     </el-form-item>
     <el-form-item label="Price">
       <el-input-number size = "medium" controls-position = "right" v-model="price"></el-input-number>
@@ -56,6 +63,8 @@
         pictures: [],
         offer: '',
         stock: '',
+        userId: 1,
+        imagesSrc: [],
         isCreating: false,
         optionSelect: [{
           value: 'Electronica',
@@ -112,6 +121,7 @@
             tags: this.tags,
             offer: this.offer,
             stock: this.stock,
+            userId: this.userId,
             pictures: urlPics
           }).then(() => {
             this.reset()

@@ -3,3 +3,5 @@ export {default as ShoppingCartProduct} from '~/components/product/ShoppingCartP
 export {default as CreateProduct} from '~/components/product/CreateProduct'
 export {default as buttonAddComponent} from '~/components/product/buttonAddComponent'
 export {default as ProductDetails} from '~/components/product/ProductDetails'
+export {default as ProductEditing} from '~/components/product/ProductEditing'
+export {default as ProductsPaginationComponent} from '~/components/product/ProductsPaginationComponent'

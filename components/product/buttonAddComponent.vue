@@ -14,7 +14,7 @@ export default {
 <style lang="scss">
 .app-fab--absolute {
   position: fixed;
-  top: 4rem;
+  bottom: 0.5rem;
   right: 0.1rem;
   background-color: #EDF2FC;
 }

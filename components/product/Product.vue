@@ -163,10 +163,14 @@ export default {
 }
 
 .image {
-  --width: 100%;
-  height: calc(var(--width)*16/9);
-  margin-top: 0.3em;
-  width: var(--width);
+  max-width: calc( 100% - 1rem );
+  margin: .5em .5em 0;
+
+    &:before {
+      content: "";
+      display: block;
+      padding-top: (100% / (16/9));
+    }
 }
 
 .clearfix:before,
