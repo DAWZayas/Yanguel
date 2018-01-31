@@ -10,7 +10,9 @@
         </el-col>
         <button-add-component v-if="admin"></button-add-component>
       </el-row>
-      <products-pagination-component @loadMore="onLoadMore" :hasMore="hasMore"></products-pagination-component>
+    <el-pagination>
+
+    </el-pagination>
     </el-main>
     <el-footer>
       <footer-component></footer-component>
@@ -22,6 +24,7 @@ import { HeaderComponent, FooterComponent } from '~/components/common'
 import { Product, buttonAddComponent, ProductsPaginationComponent } from '~/components/product'
 import { mapGetters, mapActions, mapState } from 'vuex'
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
+import ElPagination from 'element-ui/packages/pagination/src/pagination'
 
 export default {
   data () {
@@ -29,11 +32,12 @@ export default {
       admin: true,
       searchTerm: '',
       displayProducts: [],
-      pageSize: 5,
-      actualProductsSize: 5
+      pageSize: 1,
+      actualProductsSize: 1
     }
   },
   components: {
+    ElPagination,
     ProductsPaginationComponent,
     ClipLoader,
     FooterComponent,
