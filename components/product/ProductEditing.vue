@@ -1,6 +1,5 @@
 <template>
   <el-row>
-
       <el-form :model="form">
         <el-form-item label="Product name">
           <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -39,9 +38,9 @@
           <el-input v-model="form.description" placeholder="Please set the product description"></el-input>
         </el-form-item>
       </el-form>
-      <span slot="footer" class="dialog-footer">
+      <span>
               <el-button type="primary" @click="onProductEdit">Confirm</el-button>
-              <el-button @click="dialogFormVisible = false">Cancel</el-button>
+              <el-button>Cancel</el-button>
       </span>
   </el-row>
 </template>
@@ -50,8 +49,33 @@
   import {mapActions, mapState} from 'vuex'
   export default {
     name: 'product-editing',
-    props: ['form', 'product'],
-
+    props: ['product'],
+    data () {
+      return {
+        form: {
+          name: '',
+          stock: '',
+          price: '',
+          offer: '',
+          tags: [],
+          pictures: [],
+          description: ''
+        },
+        optionSelect: [{
+          value: 'Electronica',
+          label: 'Electronica'
+        }, {
+          value: 'Informatica',
+          label: 'Informatica'
+        }, {
+          value: 'Otros',
+          label: 'Otros'
+        }],
+        editProduct: {
+          '.key': this.product['.key']
+        }
+      }
+    },
     methods: {
       ...mapActions(['modifyProduct', 'removeProduct', 'unbindProductReference', 'uploadImages', 'bindProduct']),
       ...mapState(['loading']),
