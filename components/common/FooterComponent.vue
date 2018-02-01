@@ -20,9 +20,7 @@
   @import "../../assets/styles/vendors/bootstrap/variables";
   @import "../../assets/styles/utils/module";
   .footer {
-    border-top: 0.3em dotted $color-primary;
-    min-height: $footer-height;
-    padding: 0.9em 0.6em;
+    padding: 0 0.6em;
 
     .footerContainer {
       @extend .center-content;

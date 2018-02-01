@@ -40,7 +40,7 @@
       </el-form>
       <span>
               <el-button type="primary" @click="onProductEdit">Confirm</el-button>
-              <el-button>Cancel</el-button>
+              <el-button @click = "onCancel">Cancel</el-button>
       </span>
   </el-row>
 </template>
@@ -72,7 +72,8 @@
           label: 'Otros'
         }],
         editProduct: {
-          '.key': this.product['.key']
+          '.key': this.product['.key'],
+          'userId': this.product.userId
         }
       }
     },
@@ -93,6 +94,7 @@
         ev.preventDefault()
         ev.stopPropagation()
         this.reset()
+        this.goTo()
       },
       filesChange (files) {
         this.form.pictures = [...files]
@@ -118,9 +120,10 @@
           this.onSuccessEdit()
           this.dialogFormVisible = false
           this.reset()
-          this.$router.push('/')
+          this.goTo()
         }).catch(err => {
           this.editing = false
+          console.log(err)
           this.onError(err)
           this.dialogFormVisible = false
           this.reset()
@@ -132,6 +135,16 @@
           message: 'Product edited correctly.',
           position: 'bottom-right'
         })
+      },
+      onError (err) {
+        this.$notify.error({
+          title: 'Oops! Something went wrong!',
+          message: err,
+          position: 'bottom-right'
+        })
+      },
+      goTo () {
+        this.$router.push('/products/' + this.product['.key'])
       }
     }
   }
