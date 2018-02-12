@@ -35,6 +35,12 @@ export default {
   setIsAuthenticated (state, value) {
     state.isAuthenticated = value
   },
+  setUid (state, value) {
+    state.Uid = value
+  },
+  setUsersRef (state, value) {
+    state.workoutsRef = value
+  },
   saveUser (state, user) {
     state.user = {
       username: user.name,

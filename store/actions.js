@@ -140,8 +140,19 @@ export default {
       commit('setAuthError', err.message)
     })
   },
-  saveUser: firebaseAction(() => {
-
+  saveUser ({commit, state, dispatch}, user) {
+    //  let newUsersKey = uuidv1()
+    let newUsersKey = firebase.auth().currentUser.uid
+    user = {id: newUsersKey, ...user}
+    dispatch('setUid', newUsersKey)
+    return firebaseApp.database().ref('/users/' + newUsersKey).update(user)
+  },
+  bindUsers: firebaseAction(({commit, dispatch}) => {
+    let db = firebaseApp.database()
+    let usersRef = db.ref('/users')
+    dispatch('bindFirebaseReference', {reference: usersRef, toBind: 'users'}).then(() => {
+      commit('setUsersRef', usersRef)
+    })
   }),
   bindProducts: firebaseAction(({commit, dispatch}) => {
     let db = firebaseApp.database()

@@ -3,7 +3,7 @@
   <div class="gridRows">
     <header-component></header-component>
     <b class="borderBot">
-      ALBERTO ROMERO ORTIZ DE ZARATE
+
     </b>
     <br>
     <div class="gridColumns">
@@ -19,9 +19,6 @@
         </button>
         <button type="button" class="btn btn-default">
           Mis pagos
-        </button>
-        <button type="button" class="btn btn-default">
-          Ayuda
         </button>
       </div>
       <div class="datos">
