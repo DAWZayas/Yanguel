@@ -12,6 +12,12 @@
       <el-menu-item index="1-3"><nuxt-link to="/login"><i class="material-icons">account_box</i>Profile</nuxt-link></el-menu-item>
     </el-submenu>
     <el-menu-item index="2"><i class="material-icons" @click="showSearchBar">search</i></el-menu-item>
+    <el-submenu index="3">
+      <template slot="title">Filter Tags</template>
+      <el-menu-item index="3-1">Otros</el-menu-item>
+      <el-menu-item index="3-2">Informática</el-menu-item>
+      <el-menu-item index="3-3">Electrónica</el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 

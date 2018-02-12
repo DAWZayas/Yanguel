@@ -28,7 +28,6 @@ export default {
     ...mapActions(['bindProducts', 'bindProduct', 'unbindProductReference']),
     getProduct () {
       const product = this.products.filter(p => p['.key'] === this.$route.params.id)[0]
-      console.log('Producto --->', product)
       return product
     }
   },

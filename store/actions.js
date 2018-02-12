@@ -97,7 +97,8 @@ export default {
       stock: product.stock,
       offer: product.offer,
       description: product.description,
-      price: product.price
+      price: product.price,
+      userId: product.userId
     }
     const reference = '/products/' + product['.key']
     return firebaseApp.database().ref(reference).update(updateProduct)
