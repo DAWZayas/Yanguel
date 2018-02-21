@@ -113,12 +113,16 @@ export default {
   showSearchBar ({commit}) {
     commit('showSearchBar')
   },
-  authenticate ({state, commit}, {email, password}) {
+  authenticate ({state, commit, dispatch}, {email, password}) {
     firebaseApp.auth().signInWithEmailAndPassword(email, password).then(() => {
-      commit('setAuthError', '')
+      console.log(firebase.auth().currentUser.uid)
+      dispatch('setUser')
     }).catch(err => {
       commit('setAuthError', err.message)
     })
+  },
+  setUser ({state, commit, dispatch}, uid) {
+    dispatch('bindUser', uid)
   },
   authenticateWithGoogle ({state, commit}) {
     firebaseApp.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
@@ -144,10 +148,17 @@ export default {
   saveUser ({commit, state, dispatch}, user) {
     //  let newUsersKey = uuidv1()
     let newUsersKey = firebase.auth().currentUser.uid
-    user = {id: newUsersKey, ...user}
-    dispatch('setUid', newUsersKey)
+    user = {id: newUsersKey, money: 5000, admin: false, ...user}
+    commit('setUid', newUsersKey)
     return firebaseApp.database().ref('/users/' + newUsersKey).update(user)
   },
+  bindUser: firebaseAction(({commit, dispatch}, uid) => {
+    let db = firebaseApp.database()
+    let userRef = db.ref('/users/' + uid)
+    dispatch('bindFirebaseReference', {reference: userRef, toBind: 'user'}).then(() => {
+      commit('setUserRef', userRef)
+    })
+  }),
   bindUsers: firebaseAction(({commit, dispatch}) => {
     let db = firebaseApp.database()
     let usersRef = db.ref('/users')

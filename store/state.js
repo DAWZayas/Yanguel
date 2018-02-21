@@ -2,19 +2,17 @@ const productsRef = null
 const shoppingCart = null
 const product = {}
 const productRef = null
-const usersRef = null
+const userRef = null
 const isAuthenticated = null
 const loading = {}
 const user = {}
-const Uid = null
 const showSearchBar = false
 
 export default {
   products: [],
   shoppingCart,
   productsRef,
-  usersRef,
-  Uid,
+  userRef,
   product,
   productRef,
   isAuthenticated,

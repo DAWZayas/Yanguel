@@ -3,7 +3,7 @@
     <header-component></header-component>
     <el-main>
       <el-row>
-        <el-button class = "marginTop" v-if="shoppingCart" @click='buyShoppingCart'> Comprar carrito</el-button>
+        <el-button class = "marginTop" v-if="shoppingCart" @click='onBuy'> Comprar carrito</el-button>
         <el-button class = "marginTop" v-if="shoppingCart" @click='removeShoppingCart'> Vaciar carrito</el-button>
       </el-row>
       <el-row :gutter="20">
@@ -25,6 +25,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
+      money: 10000,
+      total: 0
     }
   },
   components: {
@@ -36,10 +38,34 @@ export default {
     ...mapGetters({
       products: 'getProducts',
       shoppingCart: 'getShoppingCart'
-    })
+    }),
+    totalCost () {
+      if (this.shoppingCart.length !== 0) {
+        this.total = this.shoppingCart.reduce((carry, val) => {
+          return carry + (val.cuantity * val.price)
+        }, 0)
+      }
+      console.log(this.total)
+    }
   },
   methods: {
-    ...mapActions(['onValueChange', 'removeFromCart', 'removeShoppingCart', 'buyShoppingCart'])
+    ...mapActions(['onValueChange', 'removeFromCart', 'removeShoppingCart', 'buyShoppingCart']),
+    onBuy (ev) {
+      ev.preventDefault()
+      ev.stopPropagation()
+      if (this.total > this.money) {
+        this.onError('You don\'t have enough money to buy this')
+        return
+      }
+      console.log('kk')
+    },
+    onError (err) {
+      this.$notify.error({
+        title: 'Something went wrong',
+        message: err,
+        position: 'bottom-right'
+      })
+    }
   }
 }
 </script>

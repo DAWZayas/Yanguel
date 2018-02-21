@@ -38,8 +38,8 @@ export default {
   setUid (state, value) {
     state.Uid = value
   },
-  setUsersRef (state, value) {
-    state.workoutsRef = value
+  setUserRef (state, value) {
+    state.userRef = value
   },
   saveUser (state, user) {
     state.user = {
@@ -47,6 +47,9 @@ export default {
       email: user.email,
       address: user.address
     }
+  },
+  setUser (state, user) {
+    state.user = user
   },
   setLoading (state, loading) {
     state.loading = {...state.loading, ...loading}

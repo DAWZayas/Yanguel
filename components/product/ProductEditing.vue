@@ -118,14 +118,12 @@
         }).then(() => {
           this.editing = false
           this.onSuccessEdit()
-          this.dialogFormVisible = false
           this.reset()
           this.goTo()
         }).catch(err => {
           this.editing = false
           console.log(err)
           this.onError(err)
-          this.dialogFormVisible = false
           this.reset()
         })
       },

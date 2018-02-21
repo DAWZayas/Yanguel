@@ -53,7 +53,7 @@ export default {
       ev.preventDefault()
       ev.stopPropagation()
       this.authenticate({email: this.ruleForm2.user2, password: this.ruleForm2.password2})
-      this.$router.push('/profile')
+      this.$router.push('/')
     },
     loginGoogle (ev) {
       ev.preventDefault()

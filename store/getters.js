@@ -4,5 +4,6 @@ export default {
   getIsAuthenticated: state => state.isAuthenticated,
   getProduct: state => state.product,
   getLoading: state => loading => state.loading[loading],
-  showSearchBar: state => state.showSearchBar
+  showSearchBar: state => state.showSearchBar,
+  getUser: state => state.user
 }
