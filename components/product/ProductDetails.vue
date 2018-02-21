@@ -24,10 +24,10 @@
         </el-row>
         <el-row>
           <el-col :xs="12">
-            <el-button v-if="admin && product.userId === userId" type="text" @click="goTo">Editar</el-button>
+            <el-button v-if="user && user.admin && product.userId === user.id" type="text" @click="goTo">Editar</el-button>
           </el-col>
           <el-col :xs="12">
-            <el-button v-if="admin && product.userId === userId" type="text" @click="onRemove">Eliminar</el-button>
+            <el-button v-if="user && user.admin && product.userId === user.id" type="text" @click="onRemove">Eliminar</el-button>
           </el-col>
         </el-row>
       </el-col>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-  import {mapActions, mapState} from 'vuex'
+  import {mapActions, mapState, mapGetters} from 'vuex'
   import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
   import ProductEditing from './ProductEditing'
 
@@ -44,8 +44,6 @@
     data () {
       return {
         cuantity: 0,
-        admin: true,
-        userId: 1,
         editing: false,
         dialogFormVisible: false,
         form: {
@@ -78,6 +76,12 @@
     components: {
       ProductEditing,
       ClipLoader
+    },
+    computed: {
+      ...mapGetters({
+        products: 'getProducts',
+        user: 'getUser'
+      })
     },
     props: ['product'],
     methods: {

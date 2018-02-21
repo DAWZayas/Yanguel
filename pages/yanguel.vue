@@ -8,7 +8,7 @@
         <el-col :xs="24" :md="12" :lg ="8" v-for="product in productsToDisplayPaginated" :key="product['.key']" class = "marginTop">
           <product :product="product"  @addToCart="addToCart" @removeFromCart = "removeFromCart"></product>
         </el-col>
-        <button-add-component v-if="admin"></button-add-component>
+        <button-add-component v-if="user && user.admin"></button-add-component>
       </el-row>
     <products-pagination-component @loadMore="onLoadMore" :hasMore="hasMore"></products-pagination-component>
     </el-main>
@@ -44,7 +44,8 @@ export default {
   computed: {
     ...mapGetters({
       products: 'getProducts',
-      shoppingCart: 'getShoppingCart'
+      shoppingCart: 'getShoppingCart',
+      user: 'getUser'
     }),
     ...mapState(['loading', 'showSearchBar']),
     productsToDisplay () {

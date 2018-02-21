@@ -63,7 +63,6 @@
         pictures: [],
         offer: '',
         stock: '',
-        userId: 1,
         imagesSrc: [],
         isCreating: false,
         optionSelect: [{
@@ -84,7 +83,8 @@
     },
     computed: {
       ...mapGetters({
-        products: 'getProducts'
+        products: 'getProducts',
+        user: 'getUser'
       })
     },
     methods: {
@@ -121,7 +121,7 @@
             tags: this.tags,
             offer: this.offer,
             stock: this.stock,
-            userId: this.userId,
+            userId: this.user.id,
             pictures: urlPics
           }).then(() => {
             this.reset()

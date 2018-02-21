@@ -116,7 +116,7 @@ export default {
   authenticate ({state, commit, dispatch}, {email, password}) {
     firebaseApp.auth().signInWithEmailAndPassword(email, password).then(() => {
       console.log(firebase.auth().currentUser.uid)
-      dispatch('setUser')
+      dispatch('setUser', firebase.auth().currentUser.uid)
     }).catch(err => {
       commit('setAuthError', err.message)
     })
