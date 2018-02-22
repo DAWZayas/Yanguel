@@ -37,17 +37,9 @@ export default {
   computed: {
     ...mapGetters({
       products: 'getProducts',
-      shoppingCart: 'getShoppingCart'
-    }),
-    totalCost () {
-      if (this.shoppingCart.length !== 0) {
-        this.total = this.shoppingCart.reduce((carry, val) => {
-          console.log(val)
-          return carry + (val.cuantity * val.price)
-        }, 0)
-      }
-      console.log(this.total)
-    }
+      shoppingCart: 'getShoppingCart',
+      user: 'getUser'
+    })
   },
   methods: {
     ...mapActions(['onValueChange', 'removeFromCart', 'removeShoppingCart', 'buyShoppingCart']),
@@ -58,27 +50,49 @@ export default {
       this.onSuccessRemove()
       this.$router.push('/')
     },
+    totalCost () {
+      if (this.shoppingCart.length !== 0) {
+        this.total = this.shoppingCart.reduce((carry, val) => {
+          const price = val.offer ? val.cuantity * val.offer : val.cuantity * val.price
+          return carry + price
+        }, 0)
+      }
+    },
     onBuy (ev) {
       ev.preventDefault()
       ev.stopPropagation()
-      if (this.total > this.money) {
+      if (this.user && !this.user.money) {
+        this.onError('You must login to buy')
+        return
+      }
+      this.totalCost()
+      if (this.total > this.user.money) {
         this.onError('You don\'t have enough money to buy this')
         return
       }
-      console.log(this.total)
+      this.onSuccess('Thanks for buying, hope you like your new things!')
+
+      this.total = 0
+    },
+    onSuccess (msg) {
+      this.$notify.success({
+        title: 'Yay!',
+        message: msg,
+        position: 'bottom'
+      })
     },
     onSuccessRemove () {
       this.$notify.success({
         title: 'Yay!',
         message: 'You removed your shopping cart successfuly',
-        position: 'bottom-right'
+        position: 'bottom'
       })
     },
     onError (err) {
       this.$notify.error({
         title: 'Something went wrong',
         message: err,
-        position: 'bottom-right'
+        position: 'bottom'
       })
     }
   }
