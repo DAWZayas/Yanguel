@@ -8,7 +8,7 @@
     <el-submenu index="1">
       <template slot="title"> <i class="material-icons">menu</i></template>
       <el-menu-item index="1-1"><nuxt-link to="/"><i class="material-icons">home</i>Home</nuxt-link></el-menu-item>
-      <el-menu-item index="1-2" disabled><nuxt-link to="/cart" ><i class="material-icons">shopping_cart</i>Shopping Cart</nuxt-link></el-menu-item>
+      <el-menu-item index="1-2" v-if="shoppingCart && shoppingCart.length > 0" ><nuxt-link to="/cart"><i class="material-icons">shopping_cart</i>Shopping Cart</nuxt-link></el-menu-item>
       <el-menu-item index="1-3"><nuxt-link to="/login"><i class="material-icons">account_box</i>Profile</nuxt-link></el-menu-item>
     </el-submenu>
     <el-menu-item index="2"><i class="material-icons" @click="showSearchBar">search</i></el-menu-item>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   export default {
     data () {
       return {
@@ -33,6 +33,12 @@
     },
     methods: {
       ...mapActions(['showSearchBar'])
+    },
+    computed: {
+      ...mapGetters({
+        shoppingCart: 'getShoppingCart',
+        user: 'getUser'
+      })
     }
   }
 </script>

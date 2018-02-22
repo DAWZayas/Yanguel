@@ -4,7 +4,7 @@
     <el-main>
       <el-row>
         <el-button class = "marginTop" v-if="shoppingCart" @click='onBuy'> Comprar carrito</el-button>
-        <el-button class = "marginTop" v-if="shoppingCart" @click='removeShoppingCart'> Vaciar carrito</el-button>
+        <el-button class = "marginTop" v-if="shoppingCart" @click='onRemoveShoppingCart'> Vaciar carrito</el-button>
       </el-row>
       <el-row :gutter="20">
         <el-col class = "marginTop" :xs="24" :md="12" :lg ="8" v-for="product in shoppingCart" :key="product.key">
@@ -50,6 +50,13 @@ export default {
   },
   methods: {
     ...mapActions(['onValueChange', 'removeFromCart', 'removeShoppingCart', 'buyShoppingCart']),
+    onRemoveShoppingCart (ev) {
+      ev.preventDefault()
+      ev.stopPropagation()
+      this.removeShoppingCart()
+      this.onSuccessRemove()
+      this.$router.push('/')
+    },
     onBuy (ev) {
       ev.preventDefault()
       ev.stopPropagation()
@@ -58,6 +65,13 @@ export default {
         return
       }
       console.log('kk')
+    },
+    onSuccessRemove () {
+      this.$notify.success({
+        title: 'Yay!',
+        message: 'You removed your shopping cart successfuly',
+        position: 'bottom-right'
+      })
     },
     onError (err) {
       this.$notify.error({
