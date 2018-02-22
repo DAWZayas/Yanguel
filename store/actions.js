@@ -202,6 +202,15 @@ export default {
       return
     }
   }),
+  unbindUserReference: firebaseAction(({unbindFirebaseRef, commit}) => {
+    commit('setUserRef', {})
+    commit('setUser', {})
+    try {
+      unbindFirebaseRef('user')
+    } catch (error) {
+      return
+    }
+  }),
   unbindFirebaseReferences: firebaseAction(({unbindFirebaseRef, commit}) => {
     commit('setConfigRef', null)
     commit('setStatisticsRef', null)

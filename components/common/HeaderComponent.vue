@@ -9,7 +9,8 @@
       <template slot="title"> <i class="material-icons">menu</i></template>
       <el-menu-item index="1-1"><nuxt-link to="/"><i class="material-icons">home</i>Home</nuxt-link></el-menu-item>
       <el-menu-item index="1-2" v-if="shoppingCart && shoppingCart.length > 0" ><nuxt-link to="/cart"><i class="material-icons">shopping_cart</i>Shopping Cart</nuxt-link></el-menu-item>
-      <el-menu-item index="1-3"><nuxt-link to="/login"><i class="material-icons">account_box</i>Profile</nuxt-link></el-menu-item>
+      <el-menu-item index="1-3" v-if="user && !user.name"><nuxt-link to="/login"><i class="material-icons">account_box</i>Login/Register</nuxt-link></el-menu-item>
+      <el-menu-item index="1-3" v-if="user && user.name" @click="onLogout"><nuxt-link to="/"><i class="material-icons">account_box</i>Logout</nuxt-link></el-menu-item>
     </el-submenu>
     <el-menu-item index="2"><i class="material-icons" @click="showSearchBar">search</i></el-menu-item>
     <el-submenu index="3">
@@ -32,7 +33,19 @@
     components: {
     },
     methods: {
-      ...mapActions(['showSearchBar'])
+      ...mapActions(['showSearchBar', 'unbindUserReference']),
+      onLogout (ev) {
+        this.unbindUserReference()
+        this.onSuccessLogout()
+        console.log(this.user)
+      },
+      onSuccessLogout () {
+        this.$notify.success({
+          title: 'Bye!',
+          message: 'Successfuly logged out, we hope to see you soon!.',
+          position: 'bottom'
+        })
+      }
     },
     computed: {
       ...mapGetters({

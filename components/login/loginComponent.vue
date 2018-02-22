@@ -53,12 +53,22 @@ export default {
       ev.preventDefault()
       ev.stopPropagation()
       this.authenticate({email: this.ruleForm2.user2, password: this.ruleForm2.password2})
+      this.onSuccessLogin()
       this.$router.push('/')
     },
     loginGoogle (ev) {
       ev.preventDefault()
       ev.stopPropagation()
       this.authenticateWithGoogle()
+      this.onSuccessLogin()
+      this.$router.push('/')
+    },
+    onSuccessLogin () {
+      this.$notify.success({
+        title: 'Hi!',
+        message: 'Welcome to the Yanguel!',
+        position: 'bottom'
+      })
     }
   }
 }

@@ -42,6 +42,7 @@ export default {
     totalCost () {
       if (this.shoppingCart.length !== 0) {
         this.total = this.shoppingCart.reduce((carry, val) => {
+          console.log(val)
           return carry + (val.cuantity * val.price)
         }, 0)
       }
@@ -64,7 +65,7 @@ export default {
         this.onError('You don\'t have enough money to buy this')
         return
       }
-      console.log('kk')
+      console.log(this.total)
     },
     onSuccessRemove () {
       this.$notify.success({
