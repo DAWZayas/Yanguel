@@ -31,7 +31,6 @@
       onLogout (ev) {
         this.unbindUserReference()
         this.onSuccessLogout()
-        console.log(this.user)
       },
       onSuccessLogout () {
         this.$notify.success({

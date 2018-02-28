@@ -123,6 +123,7 @@ export default {
   },
   setUser ({state, commit, dispatch}, uid) {
     dispatch('bindUser', uid)
+    dispatch('bindUserShoppingCarts', uid)
   },
   authenticateWithGoogle ({state, commit}) {
     firebaseApp.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
@@ -152,11 +153,36 @@ export default {
     commit('setUid', newUsersKey)
     return firebaseApp.database().ref('/users/' + newUsersKey).update(user)
   },
+  saveUserCart ({commit, state, dispatch}, user) {
+    //  let newUsersKey = uuidv1()
+    let newUsersCartKey = firebase.auth().currentUser.uid
+    user = {id: newUsersCartKey, money: 5000, admin: false, ...user}
+    return firebaseApp.database().ref('/users-cart/' + newUsersCartKey).update(user)
+  },
+  changeMoney ({commit, state, dispatch}, money) {
+    let newUser = {
+      address: this.state.user.address,
+      name: this.state.user.name,
+      money: this.state.user.money,
+      email: this.state.user.email,
+      id: this.state.user.id,
+      admin: this.state.user.admin
+    }
+    newUser.money -= money
+    return firebaseApp.database().ref('/users/' + newUser.id).update(newUser)
+  },
   bindUser: firebaseAction(({commit, dispatch}, uid) => {
     let db = firebaseApp.database()
     let userRef = db.ref('/users/' + uid)
     dispatch('bindFirebaseReference', {reference: userRef, toBind: 'user'}).then(() => {
       commit('setUserRef', userRef)
+    })
+  }),
+  bindUserShoppingCarts: firebaseAction(({commit, dispatch}, uid) => {
+    let db = firebaseApp.database()
+    let userCartRef = db.ref('/users-carts/' + uid)
+    dispatch('bindFirebaseReference', {reference: userCartRef, toBind: 'userCart'}).then(() => {
+      commit('setUserRef', userCartRef)
     })
   }),
   bindUsers: firebaseAction(({commit, dispatch}) => {

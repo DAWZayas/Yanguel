@@ -33,7 +33,7 @@
   export default {
     data () {
       return {
-        cuantity: 0,
+        cuantity: 1,
         shoppingCartProduct: this.product
       }
     },
@@ -47,7 +47,7 @@
         ev.stopPropagation()
         this.shoppingCartProduct.cuantity = parseInt(this.cuantity)
         this.shoppingCartProduct.cuantity !== 0 ? this.$emit('onValueChange', this.shoppingCartProduct) : this.$emit('removeFromCart', this.shoppingCartProduct)
-        this.cuantity = 0
+        this.cuantity = 1
       },
       onRemove (ev) {
         ev.preventDefault()

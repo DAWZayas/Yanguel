@@ -7,6 +7,9 @@
         <el-button class = "marginTop" v-if="shoppingCart" @click='onRemoveShoppingCart'> Vaciar carrito</el-button>
       </el-row>
       <el-row :gutter="20">
+        <el-col class = "marginTop" :xs="24">
+          Total price: {{total}}
+        </el-col>
         <el-col class = "marginTop" :xs="24" :md="12" :lg ="8" v-for="product in shoppingCart" :key="product.key">
           <shoppingCartProduct  :product="product" @onValueChange="onValueChange" @removeFromCart = "removeFromCart"></shoppingCartProduct>
         </el-col>
@@ -39,10 +42,13 @@ export default {
       products: 'getProducts',
       shoppingCart: 'getShoppingCart',
       user: 'getUser'
-    })
+    }),
+    totalPrice () {
+      this.totalCost()
+    }
   },
   methods: {
-    ...mapActions(['onValueChange', 'removeFromCart', 'removeShoppingCart', 'buyShoppingCart']),
+    ...mapActions(['onValueChange', 'removeFromCart', 'removeShoppingCart', 'buyShoppingCart', 'changeMoney']),
     onRemoveShoppingCart (ev) {
       ev.preventDefault()
       ev.stopPropagation()
@@ -61,18 +67,23 @@ export default {
     onBuy (ev) {
       ev.preventDefault()
       ev.stopPropagation()
-      if (this.user && !this.user.money) {
+      if (this.user && !this.user.name) {
         this.onError('You must login to buy')
         return
       }
       this.totalCost()
-      if (this.total > this.user.money) {
+      if (!this.user.money) {
+        this.user.money = 0
+      }
+      if (this.user && this.user.money && this.total > this.user.money) {
         this.onError('You don\'t have enough money to buy this')
         return
       }
+      this.changeMoney(this.total)
+      this.buyShoppingCart()
       this.onSuccess('Thanks for buying, hope you like your new things!')
-
       this.total = 0
+      this.$router.push('/')
     },
     onSuccess (msg) {
       this.$notify.success({
