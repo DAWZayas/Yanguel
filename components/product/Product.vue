@@ -55,7 +55,8 @@ export default {
         price: this.product.price,
         description: this.product.description,
         offer: this.product.offer ? this.product.offer : null,
-        pictures: this.product.pictures
+        pictures: this.product.pictures,
+        cuantity: 1
       }
 
     }
